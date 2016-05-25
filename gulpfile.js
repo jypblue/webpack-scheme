@@ -11,14 +11,15 @@ let webpack = require('webpack');
 let gulputil = require('gulp-util');
 // 加载webpack配置文件
 let webpackconf = require('webpack.config.js');
-let webpackdevconf = require('dev-webpack.config.js');
+//dev构建webpack配置文件
+//let webpackdevconf = require('dev-webpack.config.js');
 
 //js文件目录入口
 let src = process.cwd() + '/src';
 //文件发布版本
 let dist = process.cwd() + '/dist';
 
-//js check
+//eslint check
 gulp.task('lint', () => {
   let eslint = require('gulp-eslint');
   return gulp.src([
@@ -52,5 +53,31 @@ gulp.task('pack', ['clean'], (done) => {
 })
 
 
-
 gulp.task('default', ['pack']);
+
+/*
+gulp.task('default', ['pack'], () => {
+  let replace = require('gulp-replace');
+  let htmlmin = require('gulp-htmlmin');
+
+  return gulp.src(dist + '/*.html')
+    .pipe(htmlmin({
+      collapseWhitespace: true,
+      removeComments: true
+    }))
+    .pipe(gulp.dest(assets));
+});
+*/
+
+//deploy dist to remote server
+gulp.task('deploy', () => {
+  let sftp = require('gulp-sftp');
+
+  return gulp.src(dist + '/**')
+    .pipe(sftp({
+      host: '[remote server ip]',
+      remotePath: '/www/app/',
+      user: 'foo',
+      pass: 'bar'
+    }))
+})
