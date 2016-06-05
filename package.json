@@ -1,0 +1,20 @@
+{
+  "name": "webpack-scheme",
+  "version": "1.0.0",
+  "description": "use webpack and gulp to help write code like react es6 and sass",
+  "main": "build-webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jypblue/webpack-scheme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jypblue/webpack-scheme/issues"
+  },
+  "homepage": "https://github.com/jypblue/webpack-scheme#readme"
+}
