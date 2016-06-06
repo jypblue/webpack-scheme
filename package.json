@@ -2,16 +2,23 @@
   "name": "webpack-scheme",
   "version": "1.0.0",
   "description": "use webpack and gulp to help write code like react es6 and sass",
-  "main": "build-webpack.config.js",
+  "main": "webpack-build.config.js",
   "scripts": {
+    "dev": "node server/app",
+    "build": "gulp",
+    "release": "node server/app production",
+    "deploy": "gulp deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "server": {
+    "port": 3001
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jypblue/webpack-scheme.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["webpack", "gulp", "koa", "react", "redux"],
+  "author": "zx.wang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jypblue/webpack-scheme/issues"

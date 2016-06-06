@@ -12,7 +12,7 @@ let gulputil = require('gulp-util');
 // 加载webpack配置文件
 let webpackconf = require('webpack.config.js');
 //dev构建webpack配置文件
-//let webpackdevconf = require('dev-webpack.config.js');
+let webpackdevconf = require('webpack-dev.config.js');
 
 //js文件目录入口
 let src = process.cwd() + '/src';
@@ -31,6 +31,9 @@ gulp.task('lint', () => {
     .pipe(eslint.failAfterError());
 });
 
+//jshint check
+
+
 //clean dist
 gulp.task('clean', ['lint'], () => {
   let clean = require('clean');
@@ -41,7 +44,7 @@ gulp.task('clean', ['lint'], () => {
 
 //run webpack
 gulp.task('pack', ['clean'], (done) => {
-  webpack(webpackconf, (err, stats) => {
+  webpack(webpackdevconf, (err, stats) => {
     if (err) {
       throw new gulputil.PluginError('webpack', err);
     }

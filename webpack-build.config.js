@@ -26,10 +26,7 @@ let srcDir = path.resolve(process.cwd(), 'src');
 //发布版本文件夹
 let dist = path.resolve(process.cwd(), 'dist');
 let nodeModPath = path.resolve(__dirname, './node_modules');
-let pathMap = Object.assign({
-  'jquery': path.join(nodeModPath, '/jquery/dist/jquery.js'),
-  'zepto': path.join(nodeModPath, '/zepto/zepto.min.js')
-}, require('./src/pathMap.json'));
+let pathMap = require('./src/libsPath.json');
 
 let entries = (() => {
   let jsDir = path.resolve(srcDir, 'js');
@@ -73,9 +70,9 @@ module.exports = (options) => {
         conf.chunks = ['vender', 'common', filename];
       }
 
-      if (/b|c/.test(filename)) {
-        conf.chunks.splice(2, 0, 'common-b-c');
-      }
+      // if (/b|c/.test(filename)) {
+      //   conf.chunks.splice(2, 0, 'common-b-c');
+      // }
 
       r.push(new HtmlWebpackPlugin(conf));
     });
@@ -205,13 +202,13 @@ module.exports = (options) => {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
-      //可以自主添加提取
-      new CommonsChunkPlugin({
+      // //可以自主添加提取
+      // new CommonsChunkPlugin({
 
-      }),
-      new CommonsChunkPlugin({
+      // }),
+      // new CommonsChunkPlugin({
 
-      }),
+      // }),
       new CommonsChunkPlugin({
         name: 'vender',
         chunks: ['common']

@@ -8,7 +8,7 @@
 
 'use strict';
 
-let conf = require('./make-webpack.config');
+let conf = require('./webpack-build.config.js');
 
 module.exports = conf({
   debug: false
