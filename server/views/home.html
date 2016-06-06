@@ -9,6 +9,12 @@
 <link href="" rel="stylesheet">
 </head>
 <body>
-
+    <ul>
+      <% pages.forEach(function(page){ %>
+        <li>
+            <a href="/<%= page %>"><%= page %></a>
+        </li>
+      <% }); %>
+    </ul>
 </body>
 </html>

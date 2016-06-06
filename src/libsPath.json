@@ -1,3 +1,4 @@
 {
-
+  "zepto": "js/libs/zepto",
+  "commonCss": "css/common.css"
 }
