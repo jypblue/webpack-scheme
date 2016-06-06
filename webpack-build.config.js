@@ -48,8 +48,10 @@ module.exports = (options) => {
 
   let debug = options.debug !== undefined ? options.debug : true;
   //publicPath是绝对路径
-  let publicPath = './';
-  let extractCSS, cssLoader, sassLoader;
+  let publicPath = '/';
+  let extractCSS;
+  let cssLoader;
+  let sassLoader;
 
   //自动生成入口文件，入口js名必须和入口文件名相同
   //例如：A页的入口文件是A.html,对应js目录下必须一个A.js作为入口文件
@@ -80,14 +82,14 @@ module.exports = (options) => {
   }();
 
   //设定常用库本地加载不用每次都编译
-  plugins.push(
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom',
-      _: 'lodash',
-      $: 'jquery'
-    })
-  );
+  // plugins.push(
+  //   new webpack.ProvidePlugin({
+  //     React: 'react',
+  //     ReactDOM: 'react-dom',
+  //     _: 'lodash',
+  //     $: 'jquery'
+  //   })
+  // );
 
   //debug模式
   if (debug) {
@@ -120,7 +122,7 @@ module.exports = (options) => {
           comments: false
         },
         mangle: {
-          except: ['$', 'exports', 'require']
+          except: ['$', 'exports', 'require', 'import']
         }
       }),
 
@@ -136,7 +138,7 @@ module.exports = (options) => {
   let config = {
     entry: Object.assign(entries, {
       //将用到的公共库，加进vender中单独提取打包
-      'vender': ['zepto', 'react', 'react-dom', 'antd']
+      'vender': ['zepto']
     }),
 
     output: {
@@ -150,14 +152,14 @@ module.exports = (options) => {
     resolve: {
       root: [srcDir, nodeModPath],
       alias: pathMap,
-      extensions: ['', '.js[x]', '.css', '.scss', '.tpl', '.png', '.jpe?g']
+      extensions: ['', '.js', '.jsx', '.css', '.scss', '.tpl', '.png', '.jpg', '.jpeg']
     },
 
     module: {
       loaders: [
         //图片
         {
-          test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9])) | (woff2?|svg|jpe?g|png|gif|ico)$/,
+          test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
           //url-loader图片小于10k自动转成dataUrl，
           //否则调用file-loader,参数直接传入
           loaders: [
@@ -167,7 +169,7 @@ module.exports = (options) => {
         },
         //字体
         {
-          test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])) | (ttf|eot)$/,
+          test: /\.((ttf|eot|woff|svg)(\?t=[0-9]\.[0-9]\.[0-9]))|(ttf|eot|woff|svg)\??.*$/,
           loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
         },
         //模板
@@ -187,11 +189,13 @@ module.exports = (options) => {
         },
         //jsx
         {
-          test: /\.js[x]$/,
-          loader: ['babel-loader'],
-          query: {
-            presets: ['es2015', 'react']
-          }
+          test: /\.jsx?$/,
+          loader: 'babel?presets[]=react,presets[]=es2015'
+            // test: /\.js[x]$/,
+            // loader: ['babel-loader'],
+            // query: {
+            //   presets: ['es2015', 'react']
+            // }
         }
       ]
     },
@@ -232,7 +236,7 @@ module.exports = (options) => {
   //https://github.com/glenjamin/webpack-hot-middleware
   if (debug) {
     ((entry) => {
-      for (key of Object.keys(entry)) {
+      for (let key of Object.keys(entry)) {
         // statement
         if (!Array.isArray(entry[key])) {
           entry[key] = Array.of(entry[key]);
