@@ -1,23 +1,42 @@
-/*
- * @Author: dmyang
- * @Date:   2015-08-05 01:05:46
- * @Last Modified by:   dmyang
- * @Last Modified time: 2015-08-05 01:36:00
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-05-30 17:59:52
+ * @version $Id$
  */
 
 'use strict';
 
-var res = [
-    {
-        id: 1,
-        title: 'foo',
-        content: 'content foo'
-    },
-    {
-        id: 2,
-        title: 'title bar',
-        content: 'content bar'
-    }
-];
+let products = [{
+    category: 'Sporting Goods',
+    price: '$49.99',
+    stocked: true,
+    name: 'Football'
+}, {
+    category: 'Sporting Goods',
+    price: '$9.99',
+    stocked: true,
+    name: 'Baseball'
+}, {
+    category: 'Sporting Goods',
+    price: '$29.99',
+    stocked: false,
+    name: 'Basketball'
+}, {
+    category: 'Elect',
+    price: '$99.99',
+    stocked: true,
+    name: 'iPod'
+}, {
+    category: 'Elect',
+    price: '$399.99',
+    stocked: false,
+    name: 'iPhone 5'
+}, {
+    category: 'Elect',
+    price: '$199.99',
+    stocked: true,
+    name: 'Nexue'
+}];
 
-module.exports = res;
+module.exports = products;
