@@ -48,6 +48,7 @@ module.exports = (options) => {
 
   let debug = options.debug !== undefined ? options.debug : true;
   //publicPath是绝对路径
+  //release模式可以在publicPath前加"."，开发模式不能加，否则有bug，这是sass-loader的bug。
   let publicPath = '/';
   let extractCSS;
   let cssLoader;
@@ -163,8 +164,8 @@ module.exports = (options) => {
           //url-loader图片小于10k自动转成dataUrl，
           //否则调用file-loader,参数直接传入
           loaders: [
-            'url?limit=10000&name=img/[hash:8].[name].[ext]',
-            'image?{bypassOnDebug:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
+            'url?limit=10000&name=img/[hash:8].[name].[ext]'
+            //'image?{bypassOnDebug:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
           ]
         },
         //字体

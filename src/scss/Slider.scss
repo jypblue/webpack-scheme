@@ -49,24 +49,6 @@
 
     &.slider-arrow-right{
       right: 0;
-      &:before,&:after{
-        // content:"";
-        // border-left: 10px solid #fff;
-        // border-top: 10px solid transparent;
-        // border-bottom: 10px solid transparent;
-        // width: 0;
-        // height: 0;
-        // position: absolute;
-        // top: 10px;
-        // right: 10px;
-      }
-      &:before{
-
-      }
-      &:after{
-        // border-left: 10px solid #fff;
-        // right: 12px;
-      }
     }
 
 
@@ -86,7 +68,7 @@
     text-align: center;
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
 
     .slider-dot{
       display: inline-block;

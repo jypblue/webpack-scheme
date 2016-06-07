@@ -7,11 +7,14 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import '../fonts/iconfont.css';
 import '../scss/index.scss';
 
 render(
-  <div>
+  <div className="flex header">
+    <i className="iconfont icon-jiantouxiangzuo"></i>
     hello world!
+    <i className="iconfont icon-jiantouxiangyou"></i>
   </div>,
   document.querySelector('.container')
 )

@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-require('../../css/fonts/iconfont.css');
+require('../../fonts/iconfont.css');
 require('../../scss/Slider.scss');
 
 import SliderItem from './SliderItem';

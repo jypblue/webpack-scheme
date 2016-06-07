@@ -65,15 +65,15 @@ app.use(router.routes());
 //dev 模式
 if (debug) {
   // statement
-  let webpackDevMiddleware = require('koa-webpack-dev-middleware'),
-    webpack = require('webpack'),
-    webpackConf = require('../webpack-dev.config.js'),
-    compiler = webpack(webpackConf);
+  let webpackDevMiddleware = require('koa-webpack-dev-middleware');
+  let webpack = require('webpack');
+  let webpackConf = require('../webpack-dev.config.js');
+  let compiler = webpack(webpackConf);
 
   //使用koa做服务器配置koa-webpack-dev-middleware
   app.use(webpackDevMiddleware(compiler, webpackConf.devServer));
 
-  //配置webpack-hot-middleware实现hot module reload
+  //配置webpack-hot-middleware实现hot module replace
   let hotMiddleware = require('webpack-hot-middleware')(compiler);
 
   //koa 对webpack-hot-middleware做适配
