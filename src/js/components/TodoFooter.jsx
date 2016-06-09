@@ -8,49 +8,42 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import cn from 'classnames';
 
-export default class TodoFooter extends Component {
-  renderFilter(filter, name) {
-    if (filter === this.props.filter) {
-      // statement
-      return name;
-    }
+import { deleteAllTodos, changeFilter} from '../actions/TodoActions.js';
+import TodoPureComponent from '../components/TodoPureComponent';
 
-    return (
-      <a href="#" onClick={e => {
-        e.preventDefault();
-        this.props.onFilterChange(filter);
-      }}>
-      {name}
-      </a>
-      )
+export default class TodoFooter extends TodoPureComponent {
+  static propTypes = {
+    activeFilter: PropTypes.string.isRequired,
+    dispatch:PropTypes.func.isRequired
   }
+
+  filter = ['all','completed', 'active']
 
   render() {
+    const { dispatch } = this.props;
+
     return (
-      <p>
-        Show:
-        {'  '}
-        {this.renderFilter('SHOW_ALL','ALL')}
-        {', '}
-        {this.renderFilter('SHOW_COMPLETED', 'Completed')}
-        {', '}
-        {this.renderFilter('SHOW_ACTIVE', 'Active')}
-        .
-      </p>
-      )
+      <div>
+        <div className="btn-group">
+          { this.filters.map(filter => {
+            const className = cn('btn btn-default capitalize', { active: this.props.activeFilter === filter});
+            return (
+              <button key={filter} className={className} onClick={()=>dispatch(changeFilter(filter))}>
+                {filter}
+              </button>
+            )
+          })}
+        </div>
+        <div className="pull-right">
+          <button className="btn btn-danger" onClick={()=>dispatch(deleteAllTodos())}>Delete All</button>
+        </div>
+      </div>
+    );
   }
 }
 
-
-TodoFooter.propTypes = {
-  onFilterChange: PropTypes.func.isRequired,
-  filter:PropTypes.oneOf([
-    'SHOW_ALL',
-    'SHOW_COMPLETED',
-    'SHOW_ACTIVE'
-    ]).isRequired
-}
 
 
 

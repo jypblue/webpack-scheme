@@ -11,18 +11,42 @@ import {
   combineReducers
 } from 'redux';
 import {
-  ADD_TODO,
-  COMPLETE_TODO,
-  SET_VISIBILITY_FILTER,
-  VisibilityFilters
-} from '../actions/TodoActions.js';
-const {
-  SHOW_ALL
-} = VisibilityFilters;
+  List,
+  Map
+} from 'immutable';
+import * as types from '../containers/TodoApp.js';
 
-function visibilityFilter(state = SHOW_ALL, action) {
+function todoList(state = List(), action) {
   switch (action.type) {
-    case SET_VISIBILITY_FILTER:
+    case types.ADD_TODO:
+      return state.push(Map({
+        id: action.id,
+        text: action.text,
+        isCompleted: false,
+      }));
+
+    case types.COMPLETE_TODO:
+      return state.map(todo => {
+        if (todo.get('id') === action.id) {
+          return todo.update('isCompleted', v => !v);
+        }
+        return todo;
+      });
+
+    case types.DELETE_TODO:
+      return state.filter(todo => todo.get('id') !== action.id);
+
+    case types.DELETE_ALL_TODOS:
+      return state.clear();
+    default:
+      return state;
+  }
+}
+
+function activeFilter(state = 'all', action) {
+  switch (action.type) {
+    case types.CHANGE_FILTER:
+      console.log('%cFilter changed:' + action.filter.toUpperCase(), 'color:red;font-weight:bold;')
       return action.filter;
     default:
       return state;
@@ -30,27 +54,10 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 
 
-function todos(state = [], action) {
-  switch (action.type) {
-    case ADD_TODO:
-      // statements_1
-      return [...state, {
-        text: action.text,
-        complete: false
-      }];
-    case COMPLETE_TODO:
-      return [...state.slice(0, action.index), Object.assign({}, state[action.index], {
-        complete: true
-      }), ...state.slice(action.index + 1)];
-    default:
-      // statements_def
-      return state;
-  }
-}
 
 const todoApp = combineReducers({
-  visibilityFilter,
-  todos
+  activeFilter,
+  todoList
 });
 
 export default todoApp;

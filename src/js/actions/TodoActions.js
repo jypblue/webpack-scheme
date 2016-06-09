@@ -5,37 +5,35 @@
  * @version $Id$
  */
 
-'use strict';
 
-export const ADD_TODO = 'ADD_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+import * as types from '../containers/TodoApp.js';
 
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
+let idCounter = 0;
+
+export const addTodo = text => ({
+  type: types.ADD_TODO,
+  text,
+  id: ++idCounter
+});
+
+export const completeTodo = id => ({
+  type: types.COMPLETE_TODO,
+  id
+});
+
+export const changeFilter = filter => ({
+  type: types.CHANGE_FILTER,
+  filter
+});
+
+export const deleteTodo = id => ({
+  type: types.DELETE_TODO,
+  id
+});
+
+export const deleteAllTodos = () => {
+  idCounter = 0;
+  return {
+    type: types.DELETE_ALL_TODOS
+  };
 };
-
-export function addTodo(text) {
-  return {
-    type: ADD_TODO,
-    text
-  };
-}
-
-export function completeTodo(index) {
-  // body...
-  return {
-    type: COMPLETE_TODO,
-    index
-  };
-}
-
-export function setVisibilityFilter(filter) {
-  // body...
-  return {
-    type: SET_VISIBILITY_FILTER,
-    filter
-  };
-}

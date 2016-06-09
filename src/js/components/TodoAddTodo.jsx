@@ -8,27 +8,39 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import {addTodo } from '../actions/TodoActions.js';
 
 export default class TodoAddTodo extends Component {
+
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired
+  }
+
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  addTodo(e) {
+    e.preventDefault();
+    const input = this.refs.todo;
+    const value = input.value.trim();
+
+    if (value) {
+      this.props.dispatch(addTodo(value));
+      input.value = '';
+    }
+  }
+
   render() {
     return (
       <div>
-        <input type="text" ref='input' />
-        <button onClick={(e) => this.handleClick(e)}>
-          Add
-        </button>
+        <form onSubmit={e => this.addTodo(e)}>
+          <input type="text" className="form-control" placeholder="Enter ToDo" ref="todo"/>
+        </form>
+
       </div>
-    );
+    )
   }
 
-  handleClick(e) {
-    const node = this.refs.input;
-    const text = node.value.trim();
-    this.props.onAddClick(text);
-    node.value = '';
-  }
 }
 
-TodoAddTodo.propTypes = {
-  onAddClick: PropTypes.func.isRequired
-}

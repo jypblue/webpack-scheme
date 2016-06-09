@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-06-08 12:55:43
+ * @version $Id$
+ */
+
+.app {
+  margin: 100px auto;
+  width: 600px;
+  > .todos {
+    background-color: rgb(238,238,238);
+    border-radius: 5px;
+    padding: 30px;
+    border: 1px solid rgba(0,0,0, 0.075);
+    border-bottom-width: 2px;
+
+    .list-group-item {
+      padding: 0;
+
+      &:hover{
+        cursor: pointer;
+        background-color: rgb(252, 252, 252);
+        box-shadow: inset 0 1px 1px rgba(0,0,0, 0.075);
+      }
+      > .todo {
+        width: 95%;
+        padding: 10px 15px;
+        display: inline-block;
+      }
+
+      > .completed {
+        opacity:0.6;
+        text-decoration: line-through;
+      }
+
+      > .close {
+        width: 25px;
+        margin-top: 7px;
+      }
+    }
+
+    .capitalize {
+      text-transform: capitalize;
+    }
+  }
+
+  > .signature {
+    float: right;
+    font-size: 75%;
+    opacity:0.8;
+    margin-right: 5px;
+    margin-top: 3px;
+  }
+}
+button {
+  outline: none;
+}
