@@ -1,30 +1,25 @@
 /**
  *
  * @authors zx.wang (zx.wang1991@gmail.com)
- * @date    2016-06-07 15:17:54
+ * @date    2016-06-11 15:23:09
  * @version $Id$
  */
 
-'use strict';
-
-import React from 'react';
+import React from  'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import TodoApp from './components/TodoApp.jsx';
-import TodoReducer from './reducers/TodoReducers.js';
+import App from './containers/App.js';
+import todoApp from './reducers/Reducers.js';
 
-import '../scss/todo.scss';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+let store=createStore(todoApp);
 
-let store = createStore(TodoReducer);
+let rootElement = document.querySelector('.container');
 
-let rootNode = document.querySelector('.container');
-
-render (
+render(
   <Provider store={store}>
-    <TodoApp/>
+    <App />
   </Provider>,
-  rootNode
+  rootElement
 )
