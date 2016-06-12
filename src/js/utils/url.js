@@ -52,8 +52,7 @@ function parseUrl(url) {
 
 function serialize(obj) {
   var s = [];
-
-  $.each(obj, function(k, v) {
+  obj.forEach(function(k, v) {
     s.push(k + '=' + encodeURIComponent(v));
   });
 

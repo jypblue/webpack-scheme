@@ -11,9 +11,9 @@ let gulp = require('gulp');
 let webpack = require('webpack');
 let gulputil = require('gulp-util');
 // 加载webpack配置文件
-let webpackconf = require('webpack.config.js');
+let webpackconf = require('./webpack.config.js');
 //dev构建webpack配置文件
-let webpackdevconf = require('webpack-dev.config.js');
+let webpackdevconf = require('./webpack-dev.config.js');
 
 //js文件目录入口
 let src = process.cwd() + '/src';
@@ -37,7 +37,7 @@ gulp.task('lint', () => {
 
 //clean dist
 gulp.task('clean', ['lint'], () => {
-  let clean = require('clean');
+  let clean = require('gulp-clean');
   return gulp.src(dist, {
     read: true
   }).pipe(clean());
@@ -45,6 +45,7 @@ gulp.task('clean', ['lint'], () => {
 
 //run webpack
 gulp.task('pack', ['clean'], (done) => {
+  //开发版本webpackdevconf,生产版本webpackconf
   webpack(webpackdevconf, (err, stats) => {
     if (err) {
       throw new gulputil.PluginError('webpack', err);

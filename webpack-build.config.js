@@ -49,6 +49,7 @@ module.exports = (options) => {
   let debug = options.debug !== undefined ? options.debug : true;
   //publicPath是绝对路径
   //release模式可以在publicPath前加"."，开发模式不能加，否则有bug，这是sass-loader的bug。
+  //dev模式的时候去掉点".",发布版本是添加".";
   let publicPath = '/';
   let extractCSS;
   let cssLoader;
@@ -171,7 +172,8 @@ module.exports = (options) => {
         //字体
         {
           test: /\.((ttf|eot|woff|svg)(\?t=[0-9]\.[0-9]\.[0-9]))|(ttf|eot|woff|svg)\??.*$/,
-          loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
+          //loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
+          loader: 'url?limit=10000&name=fonts/[name].[ext]'
         },
         //模板
         {
@@ -195,23 +197,23 @@ module.exports = (options) => {
           test: /\.js[x]$/,
           loader: ['babel-loader'],
           query: {
-            presets: ['es2015', 'react', 'stage-0'],
-            plugins: [
-              ["react-transform", {
-                // must be an array of objects
-                "transforms": [{
-                  // can be an NPM module name or a local path
-                  "transform": "react-transform-hmr",
-                  // see transform docs for "imports" and "locals" dependencies
-                  "imports": ["react"],
-                  "locals": ["module"]
-                }, {
-                  // you can have many transforms, not just one
-                  "transform": "react-transform-catch-errors",
-                  "imports": ["react", "redbox-react"]
-                }]
-              }]
-            ]
+            presets: ['es2015', 'react', 'stage-0']
+              // plugins: [
+              //   ["react-transform", {
+              //     // must be an array of objects
+              //     "transforms": [{
+              //       // can be an NPM module name or a local path
+              //       "transform": "react-transform-hmr",
+              //       // see transform docs for "imports" and "locals" dependencies
+              //       "imports": ["react"],
+              //       "locals": ["module"]
+              //     }, {
+              //       // you can have many transforms, not just one
+              //       "transform": "react-transform-catch-errors",
+              //       "imports": ["react", "redbox-react"]
+              //     }]
+              //   }]
+              // ]
           }
         }
       ]

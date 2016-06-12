@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-06-07 10:14:59
+ * @version $Id$
+ */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-06-08 12:55:43
+ * @version $Id$
+ */
+body {
+  background: #f5f5f5; }
+
+header h1 {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 24px;
+  margin: 10px auto; }
+
+.container {
+  width: 760px;
+  margin: 0 auto; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  height: 0;
+  clear: both; }
+
+.panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px;
+  box-shadow: 1px 1px 1px #000; }
+  .panel .panel-header {
+    border-bottom: 2px solid #ddd; }
+    .panel .panel-header input {
+      width: 90%;
+      padding: 5px 5px;
+      padding-left: 50px;
+      font-size: 18px;
+      border: none;
+      outline: none; }
+
+.todo-list {
+  list-style: none;
+  padding: 0; }
+  .todo-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    font-size: 18px; }
+    .todo-list li input[type=checkbox] {
+      margin-right: 10px; }
+    .todo-list li button {
+      font-size: 14px; }
+
+.todo-footer {
+  margin-left: 10px;
+  margin-top: 10px; }
+  .todo-footer input[type=checkbox] {
+    margin-right: 10px; }
