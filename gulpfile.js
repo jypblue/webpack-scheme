@@ -13,7 +13,7 @@ let gulputil = require('gulp-util');
 // 加载webpack配置文件
 let webpackconf = require('./webpack.config.js');
 //dev构建webpack配置文件
-let webpackdevconf = require('./webpack-dev.config.js');
+//let webpackdevconf = require('./webpack-dev.config.js');
 
 //js文件目录入口
 let src = process.cwd() + '/src';
@@ -46,7 +46,8 @@ gulp.task('clean', ['lint'], () => {
 //run webpack
 gulp.task('pack', ['clean'], (done) => {
   //开发版本webpackdevconf,生产版本webpackconf
-  webpack(webpackdevconf, (err, stats) => {
+  //生成release版本时检查是否使用sass因为sass-loader有问题，所以最好还是原生css用于生产
+  webpack(webpackconf, (err, stats) => {
     if (err) {
       throw new gulputil.PluginError('webpack', err);
     }

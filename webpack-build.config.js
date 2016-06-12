@@ -84,14 +84,14 @@ module.exports = (options) => {
   }();
 
   //设定常用库本地加载不用每次都编译
-  // plugins.push(
-  //   new webpack.ProvidePlugin({
-  //     React: 'react',
-  //     ReactDOM: 'react-dom',
-  //     _: 'lodash',
-  //     $: 'jquery'
-  //   })
-  // );
+  plugins.push(
+    new webpack.ProvidePlugin({
+      React: 'react',
+      ReactDOM: 'react-dom'
+        // _: 'lodash',
+        // $: 'jquery'
+    })
+  );
 
   //debug模式
   if (debug) {
@@ -140,7 +140,7 @@ module.exports = (options) => {
   let config = {
     entry: Object.assign(entries, {
       //将用到的公共库，加进vender中单独提取打包
-      'vender': ['zepto']
+      'vender': ['zepto', 'react', 'react-dom']
     }),
 
     output: {
@@ -225,7 +225,7 @@ module.exports = (options) => {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
-      // //可以自主添加提取
+      // //可以自主添加提取，拆分包以免，包过大
       // new CommonsChunkPlugin({
 
       // }),

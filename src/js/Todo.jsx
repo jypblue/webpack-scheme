@@ -10,7 +10,7 @@
 import React, {Component} from 'react';
 import { render } from 'react-dom';
 require('../css/reset.css');
-require('../scss/todo.scss');
+//require('../scss/todo.scss');
 
 import LocalDb from './store/localDb.js';
 

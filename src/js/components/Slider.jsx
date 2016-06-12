@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 require('../../fonts/iconfont.css');
-require('../../scss/Slider.scss');
+//require('../../scss/Slider.scss');
 
 import SliderItem from './SliderItem';
 import SliderDots from './SliderDots';

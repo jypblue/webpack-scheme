@@ -8,7 +8,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import '../fonts/iconfont.css';
-import '../scss/index.scss';
+//import '../scss/index.scss';
 
 render(
   <div className="flex header">
