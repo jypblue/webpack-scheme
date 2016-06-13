@@ -28,13 +28,12 @@ use webpack and gulp to help write code like react es6 and sass
 
 `npm install gulp -g`
 
-`npm install eslant -g`
+`npm install eslint -g`
 
 
 #### 2. 文件目录结构
 
 ``` 
-.
 ├── gulpfile.js               # gulp任务配置                   
 ├── package.json              # 项目配置
 ├── README.md                 # 项目说明
