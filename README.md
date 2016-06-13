@@ -15,6 +15,7 @@ use webpack and gulp to help write code like react es6 and sass
 `npm install`
 
 4.node-sass包会报错，解决方法是先添加淘宝NPM镜像cnpm环境：
+
 `npm install -g cnpm --registry=https://registry.npm.taobao.org`
 
 `cnpm install --save-dev node-sass`
@@ -32,9 +33,8 @@ use webpack and gulp to help write code like react es6 and sass
 
 #### 2. 文件目录结构
 
-``` js
+``` 
 .
-                 # compass配置
 ├── gulpfile.js               # gulp任务配置                   
 ├── package.json              # 项目配置
 ├── README.md                 # 项目说明
@@ -88,7 +88,7 @@ use webpack and gulp to help write code like react es6 and sass
 2. 添加koa+mongodb的server部分以后会逐渐整合进来，最终实现React+Redux+Koa+Mongodb的web开发技术栈
 
 
-### 若对你有用，欢迎star,或者watch;welcome to star or watch.
+### 若对你有用，欢迎star,或者watch;  welcome to star or watch.
 
 
 
