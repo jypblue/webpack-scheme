@@ -1,0 +1,16 @@
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-06-06 15:13:04
+ * @version $Id$
+ */
+.header {
+  width: 100%;
+  font-size: 24px; }
+  .header > i {
+    width: 20%;
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer; }
+    .header > i:hover {
+      color: #666; }

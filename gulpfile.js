@@ -85,5 +85,45 @@ gulp.task('deploy', () => {
       remotePath: '/www/app/',
       user: 'foo',
       pass: 'bar'
-    }))
-})
+    }));
+});
+
+//因为webpack打release包事引用sass会出现问题，所以开发是可以写sass,开发完成后转化为css，
+//引入css再转换生产包打包
+require('colors');
+var gulpif = require('gulp-if');
+var plumber = require('gulp-plumber');
+var path = require('path');
+var shell = require('gulp-shell');
+var sass = require('gulp-sass');
+var livereload = require('gulp-livereload');
+
+var isBuild = true;
+
+function err(error) {
+  console.error('[ERROR]'.red + error.message);
+  this.emit('end');
+}
+// 判断文件类型
+var ifsass = function(file) {
+  var extname = path.extname(file.path);
+  return extname === '.scss' ? true : false;
+};
+gulp.task('sass', function() {
+  gulp.src('./src/scss/*.scss')
+    .pipe(plumber())
+    .pipe(gulpif(ifsass, sass()))
+    .pipe(plumber.stop())
+    .pipe(gulp.dest('./src/css/components/'));
+});
+
+gulp.task('code', function() {
+  return gulp.src(['./src/**/*.js', './**/*.css', './**/*.html'])
+    .pipe(plumber(err))
+    .pipe(livereload());
+});
+//监听
+gulp.task('watch', function() {
+  livereload.listen();
+  gulp.watch(['./src/scss/*.scss'], ['sass']);
+});

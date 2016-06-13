@@ -54,13 +54,14 @@ module.exports = (options) => {
   let extractCSS;
   let cssLoader;
   let sassLoader;
+  let lessLoader;
 
   //自动生成入口文件，入口js名必须和入口文件名相同
   //例如：A页的入口文件是A.html,对应js目录下必须一个A.js作为入口文件
 
   let plugins = () => {
     let entryHtml = glob.sync(srcDir + '/*.html');
-    let r = [];
+    let filesArr = [];
 
     entryHtml.forEach((filePath) => {
       let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
@@ -73,14 +74,14 @@ module.exports = (options) => {
         conf.inject = 'body';
         conf.chunks = ['vender', 'common', filename];
       }
+      //在第三项添加common-slider.js
+      if (/slider|todo/.test(filename)) {
+        conf.chunks.splice(2, 0, 'common-slider');
+      }
 
-      // if (/b|c/.test(filename)) {
-      //   conf.chunks.splice(2, 0, 'common-b-c');
-      // }
-
-      r.push(new HtmlWebpackPlugin(conf));
+      filesArr.push(new HtmlWebpackPlugin(conf));
     });
-    return r;
+    return filesArr;
   }();
 
   //设定常用库本地加载不用每次都编译
@@ -88,8 +89,6 @@ module.exports = (options) => {
     new webpack.ProvidePlugin({
       React: 'react',
       ReactDOM: 'react-dom'
-        // _: 'lodash',
-        // $: 'jquery'
     })
   );
 
@@ -98,6 +97,7 @@ module.exports = (options) => {
     extractCSS = new ExtractTextPlugin('css/[name].css?[contenthash]');
     cssLoader = extractCSS.extract(['css']);
     sassLoader = extractCSS.extract(['css', 'sass']);
+    lessLoader = extractCSS.extract(['css', 'less']);
 
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
 
@@ -113,6 +113,7 @@ module.exports = (options) => {
 
     cssLoader = extractCSS.extract(['css?minimize']);
     sassLoader = extractCSS.extract(['css?minimize'], 'sass');
+    lessLoader = extractCSS.extract(['css?minimize'], 'less');
 
     plugins.push(
       extractCSS,
@@ -140,7 +141,7 @@ module.exports = (options) => {
   let config = {
     entry: Object.assign(entries, {
       //将用到的公共库，加进vender中单独提取打包
-      'vender': ['zepto', 'react', 'react-dom']
+      'vender': ['react', 'react-dom']
     }),
 
     output: {
@@ -190,10 +191,13 @@ module.exports = (options) => {
           test: /\.(scss|sass)$/,
           loader: sassLoader
         },
+        //less
+        {
+          test: /\.less$/,
+          loeader: lessLoader
+        },
         //jsx
         {
-          // test: /\.jsx?$/,
-          // loader: 'babel?presets[]=react,presets[]=es2015'
           test: /\.js[x]$/,
           loader: ['babel-loader'],
           query: {
@@ -225,13 +229,18 @@ module.exports = (options) => {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
-      // //可以自主添加提取，拆分包以免，包过大
+      // //可以自主添加提取，拆分包以免包过大
       // new CommonsChunkPlugin({
 
       // }),
-      // new CommonsChunkPlugin({
-
-      // }),
+      new CommonsChunkPlugin({
+        name: 'common-slider',
+        chunks: ['rSlider', 'todo']
+      }),
+      new CommonsChunkPlugin({
+        name: 'common',
+        chunks: ['common-slider', 'index']
+      }),
       new CommonsChunkPlugin({
         name: 'vender',
         chunks: ['common']

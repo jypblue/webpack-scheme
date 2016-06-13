@@ -7,7 +7,17 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import 'resetCss';
+import 'commonCss';
+
 import Slider from './components/Slider';
+
+
+require.ensure([], function(require) {
+    let Slider = require ('./components/Slider');
+
+});
+
 
 const image_data = [
   {
@@ -27,7 +37,8 @@ const image_data = [
 render(
   <Slider effect="left" items={image_data} speed={0.8} delay={1.2} pause={true} autoplay={true} dots={true} arrows={true} />,
   document.querySelector('.container')
-  )
+)
+
 
 
 
