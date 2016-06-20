@@ -39,7 +39,7 @@ let entries = (() => {
   });
 
   return map;
-}());
+})();
 
 let chunks = Object.keys(entries);
 
@@ -59,7 +59,7 @@ module.exports = (options) => {
   //自动生成入口文件，入口js名必须和入口文件名相同
   //例如：A页的入口文件是A.html,对应js目录下必须一个A.js作为入口文件
 
-  let plugins = () => {
+  let plugins = (() => {
     let entryHtml = glob.sync(srcDir + '/*.html');
     let filesArr = [];
 
@@ -82,7 +82,7 @@ module.exports = (options) => {
       filesArr.push(new HtmlWebpackPlugin(conf));
     });
     return filesArr;
-  }();
+  })();
 
   //设定常用库本地加载不用每次都编译
   plugins.push(
