@@ -229,7 +229,7 @@ module.exports = (options) => {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
-      // //可以自主添加提取，拆分包以免包过大
+      // //可以自主添加提取公共部分，拆分包以免包过大
       // new CommonsChunkPlugin({
 
       // }),
@@ -239,7 +239,7 @@ module.exports = (options) => {
       }),
       new CommonsChunkPlugin({
         name: 'common',
-        chunks: ['common-slider', 'index']
+        chunks: ['common-slider', 'swat']
       }),
       new CommonsChunkPlugin({
         name: 'vender',

@@ -1,0 +1,55 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-06-20 15:22:33
+ * @version $Id$
+ */
+
+.app{
+    margin:10px;
+    font-family: arial;
+}
+.board{
+    display:block;
+    position:relative;
+    margin:10px 0px 10px 0px;
+    border:1px solid #ccc;
+    width:215px;
+    height:215px;
+    padding:5px;
+}
+.board span{
+    font-family: arial;
+    letter-spacing: -1px;
+    display:block;
+    width:50px;
+    height:36px;
+    position:absolute;
+    text-align:center;
+    color:white;
+    font-weight:bold;
+    font-size:20px;
+    padding-top:14px;
+    background-color:#ebe76f;
+    border-radius: 5px;
+    transition: all 100ms linear;
+}
+.a1, .b1, .c1, .d1{ left:5px; }
+.a2, .b2, .c2, .d2{ left:60px; }
+.a3, .b3, .c3, .d3{ left:115px; }
+.a4, .b4, .c4, .d4{ left:170px; }
+.a1, .a2, .a3, .a4{ top:5px; }
+.b1, .b2, .b3, .b4{ top:60px; }
+.c1, .c2, .c3, .c4{ top:115px; }
+.d1, .d2, .d3, .d4{ top:170px; }
+span.value2{ background-color:#ebb26f; }
+span.value4{ background-color:#ea6feb; }
+span.value8{ background-color:#eb6fa3; }
+span.value16{ background-color:#7a6feb; }
+span.value32{ background-color:#af6feb; }
+span.value64{ background-color:#6febcf; }
+span.value128{ background-color:#6fbeeb; }
+span.value256{ background-color:#afeb6f; }
+span.value512{ background-color:#7aeb6f; }
+span.value1024{ background-color:#e4eb6f; }
