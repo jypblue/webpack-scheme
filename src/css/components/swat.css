@@ -162,6 +162,16 @@ html{font-family:"Microsoft YaHei";}
   padding:0 10px;
 }
 
-
+.tabchange{
+  position:absolute;
+  right:100px;
+  top:10px;
+  font-size:16px;
+}
+.tabchange a {display:inline-block;margin-right:15px;padding:0 4px;}
+.tabchange a.cur{
+  background-color:#337ab7;
+  color:#fff;
+}
 
 

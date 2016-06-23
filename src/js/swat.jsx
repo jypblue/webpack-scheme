@@ -100,7 +100,7 @@ class SwatTable extends React.Component {
 render() {
     let t = this.props.data;
     let k = this.props.datakey;
-    let tables = t[k].table
+    let tables = t[k].table;
     let tabArr = [];
 
     for (var n= 0; n < tables.length; n++) {
@@ -184,21 +184,51 @@ render() {
 }
 
 class Tabs extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: this.props.swatdata.uat,
+      index: 0
+    };
+  }
+  handleClick(data,j) {
+    this.setState({
+      data:data,
+      index:j
+    });
+  }
+  checkIndex(index) {
+    return index === this.state.index ? "cur" : " ";
+  }
   render(){
     let tabnav = [];
+    let tabchange = [];
     let swatmenu = this.props.swatmenu;
     let swatdata = this.props.swatdata;
+    let tabdata = [swatdata.uat,swatdata.prd];
+    let tabName = ['UAT','PRD']
 
     for (var i = 0; i < swatmenu.length; i++) {
       tabnav[i] = (
           <div name={swatmenu[i]}>
-            <SwatTable data={swatdata} datakey={i}/>
+            <SwatTable data={this.state.data} ref="stable" datakey={i}/>
           </div>
+        )
+    }
+
+    for(let j = 0;j < tabdata.length;j++) {
+      tabchange[j] = (
+        <a href="###" className={this.checkIndex(j)} onClick={this.handleClick.bind(this,tabdata[j],j)}>{tabName[j]}</a>
         )
     }
 
     return (
       <div className="tabWrap">
+        <div className="tabchange">
+          {tabchange}
+        </div>
         <Tabspane>
           {tabnav}
         </Tabspane>
@@ -268,10 +298,11 @@ class PeopleTabs extends React.Component{
   }
 }
 
+
 ReactDOM.render(
   <div className="swatmain">
   <div className="logo">天海SWAT PORTAL</div>
-  <Tabs swatmenu={swatmenu} swatdata={swatdata.uat}/>
+  <Tabs swatmenu={swatmenu} swatdata={swatdata}/>
   <PeopleTabs swatpeople={swatpeople}/>
   </div>
   ,
