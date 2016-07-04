@@ -19,7 +19,7 @@ require.ensure([], function(require) {
 });
 
 
-const image_data = [
+const imagedata = [
   {
     src:require('../img/d1.jpg'),
     alt:'images-1'
@@ -35,7 +35,7 @@ const image_data = [
 ];
 
 render(
-  <Slider effect="left" items={image_data} speed={0.8} delay={1.2} pause={true} autoplay={true} dots={true} arrows={true} />,
+  <Slider effect="left" items={ imagedata } speed={0.8} delay={1.2} pause={true} autoplay={true} dots={true} arrows={true} />,
   document.querySelector('.container')
 )
 

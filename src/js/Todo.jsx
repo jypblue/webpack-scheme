@@ -50,7 +50,7 @@ class Todos extends Component {
   }
 
   //改变任务状态，传递给TodoItem和TodoFooter组件的方法
-  changeTodoState(index, isDone, isChangeAll=false) {
+  changeTodoState(index, isDone, isChangeAll = false) {
     if (isChangeAll) {
       this.setState({
         todos: this.state.todos.map((todo)=>{
@@ -92,11 +92,11 @@ render() {
 
   return (
     <div className="panel">
-      <TodoHeader addTodo={this.addTodo.bind(this)}/>
+      <TodoHeader addTodo={this.addTodo.bind(this)} />
       <TodoMain deleteTodo={this.deleteTodo.bind(this)} todos={this.state.todos} changeTodoState={this.changeTodoState.bind(this)}/>
       <TodoFooter isAllChecked={this.state.isAllChecked} clearDone={this.clearDone.bind(this)} {...props} changeTodoState={this.changeTodoState.bind(this)}/>
     </div>
-  )
+  );
 }
 }
 

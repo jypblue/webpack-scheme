@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import 'resetCss';
 import 'commonCss';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/components/swat.css';
-import swat from './store/swatdata.js';
+import swat from './store/Skysea_SWAT.js';
 
 let swatmenu = swat.swatmenu;
 let swatdata = swat.swatdata;
@@ -27,18 +27,18 @@ class Tabspane extends React.Component {
   }
 
   checkTitleIndex(index) {
-    return index === this.state.currentIndex ? "tabTitle active" : "tabTitle";
+    return index === this.state.currentIndex ? 'tabTitle active' : 'tabTitle';
   }
 
   checkItemIndex(index) {
-    return index === this.state.currentIndex ? "tabItem show":"tabItem";
+    return index === this.state.currentIndex ? 'tabItem show' : 'tabItem';
   }
   handleClick(index){
     this.setState(
     {
       currentIndex:index
     }
-    )
+    );
   }
   render() {
     let self = this;
@@ -75,7 +75,7 @@ class Tabspane extends React.Component {
         })}
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -86,13 +86,13 @@ class TableHeader extends React.Component {
     for (var i = 0; i < columes.length; i++) {
       th[i] = (
         <th>{columes[i].name}</th>
-      )
+      );
     }
     return (
       <tr>
         {th}
       </tr>
-    )
+    );
   }
 }
 
@@ -103,7 +103,7 @@ render() {
     let tables = t[k].table;
     let tabArr = [];
 
-    for (var n= 0; n < tables.length; n++) {
+    for (var n = 0; n < tables.length; n++) {
       let data = t[k].table[n].data;
       let tr = [];
       let td = [];
@@ -118,40 +118,38 @@ render() {
             for (var m = 0; m < plenth; m++) {
             if(data[i].rows[j][m].img){
                  p.push(
-                  <p key={i+'-'+j+'-'+m}>
+                  <p key={i + '-' + j + '-' + m}>
                   <a target="_blank" href={data[i].rows[j][m].href ? data[i].rows[j][m].href : '###'}>
                   <img src={data[i].rows[j][m].img } alt=""/>
                   {/*data[i].rows[j][m].name*/}
                   </a>
                   </p>
-                  )
-              }
-             else if (data[i].rows[j][m].href) {
+                  );
+              } else if(data[i].rows[j][m].href) {
                 p.push(
-                  <p key={i+'-'+j+'-'+m}>
+                  <p key={i + '-' + j + '-' + m}>
                   <a target="_blank" href={data[i].rows[j][m].href}>{data[i].rows[j][m].name}</a>
                 </p>
-                )
-              }
-              else {
+                );
+              } else {
                 p.push(
-                <p key={i+'-'+j+'-'+m}>
+                <p key={i + '-' + j + '-' + m}>
                   {data[i].rows[j][m].name}
                 </p>
-                )
+                );
               }
             }
         td[j] = (
-          <td key={i+'-'+j}>
+          <td key={ i + '-' + j}>
             {p}
           </td>
-        )
+        );
                       p = [];
       }
 
       tr[i] = (
           <tr>{td}</tr>
-      )
+      );
       td = [];
     }
 
@@ -168,7 +166,7 @@ render() {
           </table>
             </div>
 
-      )
+      );
       tr = [];
     }
 
@@ -179,7 +177,7 @@ render() {
           {tabArr}
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -200,7 +198,7 @@ class Tabs extends React.Component {
     });
   }
   checkIndex(index) {
-    return index === this.state.index ? "cur" : " ";
+    return index === this.state.index ? 'cur' : '';
   }
   render(){
     let tabnav = [];
@@ -208,20 +206,20 @@ class Tabs extends React.Component {
     let swatmenu = this.props.swatmenu;
     let swatdata = this.props.swatdata;
     let tabdata = [swatdata.uat,swatdata.prd];
-    let tabName = ['UAT','PRD']
+    let tabName = ['UAT','PRD'];
 
     for (var i = 0; i < swatmenu.length; i++) {
       tabnav[i] = (
           <div name={swatmenu[i]}>
             <SwatTable data={this.state.data} ref="stable" datakey={i}/>
           </div>
-        )
+        );
     }
 
     for(let j = 0;j < tabdata.length;j++) {
       tabchange[j] = (
         <a href="###" className={this.checkIndex(j)} onClick={this.handleClick.bind(this,tabdata[j],j)}>{tabName[j]}</a>
-        )
+        );
     }
 
     return (
@@ -233,7 +231,7 @@ class Tabs extends React.Component {
           {tabnav}
         </Tabspane>
       </div>
-      )
+      );
   }
 }
 
@@ -249,16 +247,16 @@ class PeopleList extends React.Component {
             </div>
             <div className="name">
               <p>{pdata[i].name}</p>
-              <p><a href={"tel:"+ pdata[i].tel }>{pdata[i].tel}</a></p>
+              <p><a href={'tel:' + pdata[i].tel }>{pdata[i].tel}</a></p>
             </div>
           </li>
-        )
+        );
     }
     return(
         <ul>
           {li}
         </ul>
-      )
+      );
   }
 }
 
@@ -292,7 +290,7 @@ class PeopleTabs extends React.Component{
           </Tabspane>
         </div>
         </div>
-      )
+      );
 
 
   }
@@ -307,7 +305,7 @@ ReactDOM.render(
   </div>
   ,
   document.querySelector('.swat')
-)
+);
 
 
 

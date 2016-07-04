@@ -6,6 +6,7 @@
   },
   "parserOptions": {
     "ecmaVersion": 6,
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
@@ -35,9 +36,9 @@
     "new-cap": 0,
     "no-undef": [2],
     "arrow-body-style": 0,
-    react/jsx-closing-bracket-location: 0,
-    react/jsx-space-before-closing: 0,
-    react/jsx-no-bind: 0,
-    prefer-template: 0
+    "react/jsx-closing-bracket-location": 0,
+    "react/jsx-space-before-closing": 0,
+    "react/jsx-no-bind": 0,
+    "prefer-template": 0
   }
 }

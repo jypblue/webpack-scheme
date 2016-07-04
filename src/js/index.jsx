@@ -19,4 +19,4 @@ render(
     <i className="iconfont icon-jiantouxiangyou"></i>
   </div>,
   document.querySelector('.container')
-)
+);

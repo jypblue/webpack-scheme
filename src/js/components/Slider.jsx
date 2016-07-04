@@ -27,7 +27,7 @@ export default class Slider extends Component {
   //也分effect做对应的修改
   turn(step) {
     let n = this.state.cur + step;
-    if (n<0) {
+    if (n < 0) {
       // statement
       n = n + this.props.items.length;
     }
@@ -49,7 +49,7 @@ export default class Slider extends Component {
       // statement
       this.autoPlayFlag = setInterval(()=>{
         this.turn(1);
-      }, this.props.delay*1000);
+      }, this.props.delay * 1000);
 
     }
   }
@@ -110,10 +110,12 @@ export default class Slider extends Component {
 
 
     return (
-      <div className="slider" onMouseOver={this.props.pause?this.pausePlay.bind(this):null} onMouseOut={this.props.pause?this.goPlay.bind(this):null}>
+      <div className="slider"
+           onMouseOver={this.props.pause ? this.pausePlay.bind(this) : null}
+           onMouseOut={this.props.pause ? this.goPlay.bind(this) : null}>
         {itemNodes}
-        {this.props.arrows?arrowsNode:null}
-        {this.props.dots?dotsNode:null}
+        {this.props.arrows ? arrowsNode : null}
+        {this.props.dots ? dotsNode : null}
       </div>
     );
   }
