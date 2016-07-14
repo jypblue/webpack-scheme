@@ -12,7 +12,7 @@ let path = require('path');
 let fs = require('fs');
 
 let webpack = require('webpack');
-let _ = require('lodash');
+//let _ = require('lodash');
 let glob = require('glob');
 
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -85,12 +85,12 @@ module.exports = (options) => {
   })();
 
   //设定常用库本地加载不用每次都编译
-  plugins.push(
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom'
-    })
-  );
+  // plugins.push(
+  //   new webpack.ProvidePlugin({
+  //     React: 'react',
+  //     ReactDOM: 'react-dom'
+  //   })
+  // );
 
   //debug模式
   if (debug) {
@@ -233,19 +233,18 @@ module.exports = (options) => {
       // new CommonsChunkPlugin({
 
       // }),
-      new CommonsChunkPlugin({
-        name: 'common-slider',
-        chunks: ['rSlider', 'todo']
-      }),
-      new CommonsChunkPlugin({
-        name: 'common',
-        chunks: ['common-slider', 'swat']
-      }),
+      // new CommonsChunkPlugin({
+      //   name: 'common-slider',
+      //   chunks: ['rSlider', 'todo']
+      // }),
+      // new CommonsChunkPlugin({
+      //   name: 'common',
+      //   chunks: ['rSlider', 'Todo', 'rxTodo', 'rxCounter']
+      // }),
       new CommonsChunkPlugin({
         name: 'vender',
-        chunks: ['common']
+        chunks: ['rSlider', 'Todo', 'rxTodo', 'rxCounter']
       })
-
     ].concat(plugins),
 
     devServer: {
