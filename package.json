@@ -32,6 +32,7 @@
   "homepage": "https://github.com/jypblue/webpack-scheme#readme",
   "dependencies": {
     "antd": "^1.6.4",
+    "babel-polyfill": "^6.9.1",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "react": "^15.1.0",
