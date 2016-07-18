@@ -12,7 +12,7 @@ let path = require('path');
 let fs = require('fs');
 
 let webpack = require('webpack');
-let _ = require('lodash');
+//let _ = require('lodash');
 let glob = require('glob');
 
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -233,17 +233,17 @@ module.exports = (options) => {
       // new CommonsChunkPlugin({
 
       // }),
-      new CommonsChunkPlugin({
-        name: 'common-slider',
-        chunks: ['rSlider', 'todo']
-      }),
-      new CommonsChunkPlugin({
-        name: 'common',
-        chunks: ['common-slider', 'swat']
-      }),
+      // new CommonsChunkPlugin({
+      //   name: 'common-slider',
+      //   chunks: ['rSlider', 'todo']
+      // }),
+      // new CommonsChunkPlugin({
+      //   name: 'common',
+      //   chunks: ['common-slider', 'swat']
+      // }),
       new CommonsChunkPlugin({
         name: 'vender',
-        chunks: ['common']
+        chunks: ['2048', 'rxCounter', 'rxReddit', 'rxTodo', 'Todo', 'rSlider']
       })
 
     ].concat(plugins),
