@@ -32,9 +32,6 @@ gulp.task('lint', () => {
     .pipe(eslint.failAfterError());
 });
 
-//jshint check
-
-
 //clean dist
 gulp.task('clean', ['lint'], () => {
   let clean = require('gulp-clean');
@@ -60,20 +57,6 @@ gulp.task('pack', ['clean'], (done) => {
 
 
 gulp.task('default', ['pack']);
-
-/*
-gulp.task('default', ['pack'], () => {
-  let replace = require('gulp-replace');
-  let htmlmin = require('gulp-htmlmin');
-
-  return gulp.src(dist + '/*.html')
-    .pipe(htmlmin({
-      collapseWhitespace: true,
-      removeComments: true
-    }))
-    .pipe(gulp.dest(assets));
-});
-*/
 
 //deploy dist to remote server
 gulp.task('deploy', () => {
