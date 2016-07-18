@@ -9,5 +9,14 @@ import { createStore } from 'redux';
 import rootReducer from '../reducers/rxTodos';
 
 export default function configureStore(initialState) {
-  return createStore(rootReducer,initialState);
+  const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, initialState);
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers/rxTodos', () => {
+      const nextReducer = require('../reducers/rxTodos');
+      store.replaceReducer(nextReducer);
+    });
+  }
+  return store;
 }
