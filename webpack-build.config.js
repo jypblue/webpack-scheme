@@ -85,12 +85,12 @@ module.exports = (options) => {
   })();
 
   //设定常用库本地加载不用每次都编译
-  plugins.push(
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom'
-    })
-  );
+  // plugins.push(
+  //   new webpack.ProvidePlugin({
+  //     React: 'react',
+  //     ReactDOM: 'react-dom'
+  //   })
+  // );
 
   //debug模式
   if (debug) {
@@ -245,7 +245,6 @@ module.exports = (options) => {
         name: 'vender',
         chunks: ['2048', 'rSlider', 'rxCounter', 'rxReddit', 'rxTodo', 'todo']
       })
-
     ].concat(plugins),
 
     devServer: {

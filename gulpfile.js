@@ -13,7 +13,7 @@ let gulputil = require('gulp-util');
 // 加载webpack配置文件
 let webpackconf = require('./webpack.config.js');
 //dev构建webpack配置文件
-//let webpackdevconf = require('./webpack-dev.config.js');
+let webpackdevconf = require('./webpack-dev.config.js');
 
 //js文件目录入口
 let src = process.cwd() + '/src';
