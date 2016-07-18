@@ -7,8 +7,9 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import 'resetCss';
-import 'commonCss';
+require('resetCss');
+require('commonCss');
+
 
 import Slider from './components/Slider';
 
