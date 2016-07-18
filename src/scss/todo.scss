@@ -1,0 +1,82 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-06-08 12:55:43
+ * @version $Id$
+ */
+
+body{
+    background: #f5f5f5;
+}
+header{
+    h1{
+        text-align: center;
+        text-decoration: underline;
+        font-size: 24px;
+        margin: 10px auto;
+    }
+}
+
+.container{
+    width: 760px;
+    margin: 0 auto;
+}
+
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.clearfix:after{
+    content: "";
+    display: table;
+    height: 0;
+    clear: both;
+}
+
+.panel{
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    box-shadow: 1px 1px 1px #000;
+
+    .panel-header{
+        input{
+            width: 90%;
+            padding: 5px 5px;
+            padding-left: 50px;
+            font-size: 18px;
+            border: none;
+            outline: none;
+        }
+        border-bottom: 2px solid #ddd;
+    }
+}
+
+.todo-list{
+    list-style: none;
+    padding: 0;
+    li{
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        font-size: 18px;
+
+        input[type=checkbox]{
+            margin-right: 10px;
+        }
+
+        button{
+            font-size: 14px;
+        }
+    }
+}
+
+.todo-footer{
+    margin-left: 10px;
+    margin-top: 10px;
+    input[type=checkbox]{
+        margin-right: 10px;
+    }
+}
