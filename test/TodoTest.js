@@ -4,7 +4,12 @@
  * @date    2016-07-18 18:25:15
  * @version $Id$
  */
-import expect from 'expect';
+/**
+ * mocha/chai 测试react+redux
+ */
+import {
+  expect
+} from 'chai';
 import * as actions from '../src/js/actions/rxTodoActions';
 import * as types from '../src/js/constants/rxTodoActionTypes';
 
@@ -15,6 +20,6 @@ describe('actions', () => {
       type: types.ADD_TODO,
       text
     };
-    expect(actions.addTodo(text)).toEqual(expectedAction);
+    expect(actions.addTodo(text)).to.eql(expectedAction);
   })
 })
