@@ -7,10 +7,10 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/rxCounter';
+import rootCounterReducer from '../reducers/rxCounter';
 
 const enhancer = applyMiddleware(thunk);
 
 export default function configureStore(initialState) {
-  return createStore(rootReducer,initialState,enhancer);
+  return createStore(rootCounterReducer,initialState,enhancer);
 }

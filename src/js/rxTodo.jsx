@@ -10,10 +10,10 @@ import '../css/components/rxtodo.css';
 import React from 'react';
 import { render } from 'react-dom';
 import configureStore from './store/rxTodoConfigureStore';
-import Root from './containers/rxTodoRoot';
+import TodoRoot from './containers/rxTodoRoot';
 
 const store = configureStore();
 render (
-  <Root store={store}/>,
+  <TodoRoot store={store}/>,
   document.getElementById('root')
 );

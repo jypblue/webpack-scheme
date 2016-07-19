@@ -12,7 +12,7 @@ import {
 } from 'react-redux';
 import CounterApp from './rxCounterApp';
 
-export default class root extends Component {
+export default class CounterRoot extends Component {
   render() {
     const {
       store

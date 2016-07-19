@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import TodoApp from './rxTodoApp';
 
-export default class Root extends Component {
+export default class TodoRoot extends Component {
   render() {
     const { store } = this.props;
     return (

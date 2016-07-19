@@ -21,8 +21,8 @@ function counter (state = 0, action) {
   }
 }
 
-const rootReducer = combineReducers({
+const rootCounterReducer = combineReducers({
   counter
 });
 
-export default rootReducer;
+export default rootCounterReducer;

@@ -12,7 +12,7 @@ import AsyncApp from './rxAsyncApp';
 
 const store = configureStore();
 
-export default class Root extends Component {
+export default class RedditRoot extends Component {
   render() {
     return (
       <Provider store={store}>

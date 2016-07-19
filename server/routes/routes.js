@@ -53,6 +53,7 @@ module.exports = (router, app, staticDir) => {
     debug: true
   });
 
+  //home页
   router.get('/', function*() {
     /* body... */
     let pages = fs.readdirSync(staticDir);
@@ -65,4 +66,10 @@ module.exports = (router, app, staticDir) => {
       pages: pages || []
     });
   });
+
+  // Test
+  router.get('/api/server', function*() {
+    this.body = 'nihao';
+  });
+
 };

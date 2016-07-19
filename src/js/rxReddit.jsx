@@ -8,9 +8,9 @@
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import Root from './containers/rxRedditRoot';
+import RedditRoot from './containers/rxRedditRoot';
 
 render(
-  <Root />,
+  <RedditRoot />,
   document.getElementById('root')
 )

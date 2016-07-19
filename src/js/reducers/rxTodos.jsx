@@ -54,8 +54,8 @@ function todos(state = initialState, action) {
   }
 }
 
-const rootReducer = combineReducers({
+const rootTodosReducer = combineReducers({
   todos
 });
 
-export default rootReducer;
+export default rootTodosReducer;

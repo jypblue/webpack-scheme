@@ -6,10 +6,10 @@
  */
 
 import { createStore } from 'redux';
-import rootReducer from '../reducers/rxTodos';
+import rootTodosReducer from '../reducers/rxTodos';
 
 export default function configureStore(initialState) {
-  const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, initialState);
+  const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootTodosReducer, initialState);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
