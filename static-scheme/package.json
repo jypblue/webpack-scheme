@@ -1,5 +1,5 @@
 {
-  "name": "webpack-scheme",
+  "name": "static-scheme",
   "version": "1.0.0",
   "description": "use webpack and gulp to help write code like react es6 and sass",
   "main": "webpack-build.config.js",
@@ -37,6 +37,7 @@
     "classnames": "^2.2.5",
     "history": "^2.1.0",
     "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",

@@ -1,16 +1,16 @@
-## webpack-scheme
+## static-scheme
 use webpack and gulp to help write code like react es6 and sass
 
 ### webpack构建React,Redux,Sass,Es6前端开发环境
 
 #### 1. 环境配置
-1.安装node版本5.0以上
+1.安装node版本6.0以上
 
 2.clone或者download本工程到本地
 
 3.执行命令安装依赖包:
 
-`cd webpack-scheme`
+`cd webpack-scheme/static-scheme`
 
 `npm install`
 
@@ -33,16 +33,12 @@ use webpack and gulp to help write code like react es6 and sass
 
 #### 2. 文件目录结构
 
-``` 
-├── gulpfile.js               # gulp任务配置                   
+```
+├── gulpfile.js               # gulp任务配置
 ├── package.json              # 项目配置
 ├── README.md                 # 项目说明
 ├── server                    # 本地server
 │   ├── app.js                # 本地server入口
-│   ├── bin/                  # 本地命令文件夹	
-│   ├── controllers/    	   # 本地controllers     
-│   ├── models/               # 本地models 
-│   ├── public/               # server资源目录
 │   ├── routes/               #	 本地路由配置
 │   ├── schemas               # 列出项目所有入口文件
 │   └── views/                # 本地views
@@ -57,7 +53,7 @@ use webpack and gulp to help write code like react es6 and sass
 │   │   ├── rSlider.js        # rSlider页面入口
 │   │   ├── action/			   # actions文件夹：存放可以发出的action
 │   │   ├── components/       # 组件
-│   │   ├── constants/        # 
+│   │   ├── constants/        #
 │   │   ├── containers/       # 容器文件夹：存放容器组件
 │   │   ├── reducers/         # reducers文件夹：存放action的处理器reducers
 │   │   ├── store/            # 数据模型文件夹
@@ -80,11 +76,6 @@ use webpack and gulp to help write code like react es6 and sass
 6. 本地查看release版本命令：`npm run release`
 7. 如果需要使用less开发，请自行添加目录，webpack-build.config.js添加了less支持
 8. 如果使用了iconfont，css引入字体文件的地址会不准确，可以自行修改成相对目录或者绝对目录
-
-
-#### 4. 目标
-1. 后续会添加一些react-redux的例子进来
-2. 添加koa+mongodb的server部分以后会逐渐整合进来，最终实现React+Redux+Koa+Mongodb的web开发技术栈
 
 
 ### 若对你有用，欢迎star,或者watch;  welcome to star or watch.

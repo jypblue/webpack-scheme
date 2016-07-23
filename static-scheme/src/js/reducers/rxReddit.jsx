@@ -12,7 +12,7 @@ function selectedSubreddit(state = 'reactjs',action) {
   switch (action.type) {
     case SELECT_SUBREDDIT:
       // statements_1
-      return action.subreddit; //？啥意思
+      return action.subreddit; //action中携带的数据
     default:
       // statements_def
       return state;

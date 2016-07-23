@@ -12,7 +12,6 @@ export default class SliderArrows extends Component {
 
     this.state = {};
   }
-
   handleArrowClick(option) {
     this.props.turn(option);
   }
