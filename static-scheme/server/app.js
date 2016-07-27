@@ -22,9 +22,9 @@ let open = require('open');
 //加载本地文件
 let pkg = require('../package.json');
 let env = process.argv[2] || process.env.NODE_ENV;
-let debug = 'production' !== env;
-let viewDir = debug ? 'src' : 'dist';
-let staticDir = path.resolve(__dirname, '../' + (debug ? 'src' : 'dist'));
+let dev = 'production' !== env;
+let viewDir = dev ? 'src' : 'dist';
+let staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
 
 //加载routes
 let routes = require('./routes/routes.js');
@@ -63,7 +63,7 @@ routes(router, app, staticDir);
 app.use(router.routes());
 
 //dev 模式
-if (debug) {
+if (dev) {
   // statement
   let webpackDevMiddleware = require('koa-webpack-dev-middleware');
   let webpack = require('webpack');
@@ -104,6 +104,6 @@ colors.setTheme({
   data: 'grey',
   help: 'cyan',
   warn: 'yellow',
-  debug: 'blue',
+  dev: 'blue',
   error: 'red'
 });

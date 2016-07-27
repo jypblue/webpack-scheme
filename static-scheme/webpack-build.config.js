@@ -46,7 +46,7 @@ let chunks = Object.keys(entries);
 module.exports = (options) => {
   options = options || {};
 
-  let debug = options.debug !== undefined ? options.debug : true;
+  let dev = options.dev !== undefined ? options.dev : true;
   //publicPath是绝对路径
   //release模式可以在publicPath前加"."，开发模式不能加，否则有bug，这是sass-loader的bug。
   //dev模式的时候去掉点".",发布版本是添加".";
@@ -92,8 +92,8 @@ module.exports = (options) => {
   //   })
   // );
 
-  //debug模式
-  if (debug) {
+  //dev模式
+  if (dev) {
     extractCSS = new ExtractTextPlugin('css/[name].css?[contenthash]');
     cssLoader = extractCSS.extract(['css']);
     sassLoader = extractCSS.extract(['css', 'sass']);
@@ -146,9 +146,9 @@ module.exports = (options) => {
 
     output: {
       path: dist,
-      filename: debug ? '[name].js' : 'js/[chunkhash:8].[name].min.js',
-      chunkFilename: debug ? '[chunkhash:8].chunk.js' : 'js/[chunkhash:8].chunk.min.js',
-      hotUpdateChunkFilename: debug ? '[id].js' : 'js/[id].[chunkhash:8].min.js',
+      filename: dev ? '[name].js' : 'js/[chunkhash:8].[name].min.js',
+      chunkFilename: dev ? '[chunkhash:8].chunk.js' : 'js/[chunkhash:8].chunk.min.js',
+      hotUpdateChunkFilename: dev ? '[id].js' : 'js/[id].[chunkhash:8].min.js',
       publicPath: publicPath
     },
 
@@ -167,7 +167,7 @@ module.exports = (options) => {
           //否则调用file-loader,参数直接传入
           loaders: [
             'url?limit=10000&name=img/[hash:8].[name].[ext]'
-            //'image?{bypassOnDebug:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
+            //'image?{bypassOndev:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
           ]
         },
         //字体
@@ -262,7 +262,7 @@ module.exports = (options) => {
 
   //为实现webpack-hot-middleware做相关配置
   //https://github.com/glenjamin/webpack-hot-middleware
-  if (debug) {
+  if (dev) {
     ((entry) => {
       for (let key of Object.keys(entry)) {
         // statement

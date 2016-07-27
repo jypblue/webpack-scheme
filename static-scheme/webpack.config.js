@@ -11,5 +11,5 @@
 let conf = require('./webpack-build.config.js');
 
 module.exports = conf({
-  debug: false
+  dev: false
 });
