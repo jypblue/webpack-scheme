@@ -100,11 +100,11 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('./src/css/components/'));
 });
 
-gulp.task('code', function() {
-  return gulp.src(['./src/**/*.js', './**/*.css', './**/*.html'])
-    .pipe(plumber(err))
-    .pipe(livereload());
-});
+// gulp.task('code', function() {
+//   return gulp.src(['./src/**/*.js', './**/*.css', './**/*.html'])
+//     .pipe(plumber(err))
+//     .pipe(livereload());
+// });
 //监听
 gulp.task('watch', function() {
   livereload.listen();
