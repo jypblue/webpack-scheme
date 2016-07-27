@@ -1,7 +1,7 @@
 ## static-scheme
 use webpack and gulp to help write react redux es2015 and sass
 
-### webpack构建React,Redux,Sass,Es6前端解决方案
+### webpack构建React,Redux,Sass,Es2015前端原型脚手架
 
 #### 1. 环境配置
 1.安装node版本4.0以上

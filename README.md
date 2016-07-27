@@ -1,7 +1,8 @@
-### webpack-scheme
+### webpack-schemes
 
-#### 1.dynamic-scheme
-前端单页应用，React+Redux实例，首页后端渲染+自定义前端路由
+#### 1.static-scheme
+React,Redux,Sass,Es2015前端原型开发脚手架
 
-#### 2.static-scheme
-前端多页应用，构建React,Redux,Sass,Es6前端原型开发脚手架
+#### 2.dynamic-scheme
+React+Redux Solution，首页Node后端渲染+React-Router路由
+
