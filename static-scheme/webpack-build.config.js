@@ -85,12 +85,12 @@ module.exports = (options) => {
   })();
 
   //设定常用库本地加载不用每次都编译
-  plugins.push(
-    new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom'
-    })
-  );
+  // plugins.push(
+  //   new webpack.ProvidePlugin({
+  //     React: 'react',
+  //     ReactDOM: 'react-dom'
+  //   })
+  // );
 
   //debug模式
   if (debug) {
@@ -201,7 +201,9 @@ module.exports = (options) => {
           test: /\.js[x]$/,
           loader: ['babel-loader'],
           query: {
-            presets: ['es2015', 'react', 'stage-0']
+            presets: ['es2015', 'react', 'stage-0', ["antd", {
+                "style": "css"
+              }]]
               // plugins: [
               //   ["react-transform", {
               //     // must be an array of objects
