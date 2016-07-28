@@ -12,7 +12,6 @@ let path = require('path');
 let fs = require('fs');
 
 let webpack = require('webpack');
-//let _ = require('lodash');
 let glob = require('glob');
 
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -83,14 +82,6 @@ module.exports = (options) => {
     });
     return filesArr;
   })();
-
-  //设定常用库本地加载不用每次都编译
-  // plugins.push(
-  //   new webpack.ProvidePlugin({
-  //     React: 'react',
-  //     ReactDOM: 'react-dom'
-  //   })
-  // );
 
   //dev模式
   if (dev) {
@@ -176,11 +167,6 @@ module.exports = (options) => {
           //loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
           loader: 'url?limit=10000&name=fonts/[name].[ext]'
         },
-        //模板
-        {
-          test: /\.(tpl|ejs)$/,
-          loader: 'ejs'
-        },
         //css
         {
           test: /\.css$/,
@@ -202,22 +188,6 @@ module.exports = (options) => {
           loader: ['babel-loader'],
           query: {
             presets: ['es2015', 'react', 'stage-0']
-              // plugins: [
-              //   ["react-transform", {
-              //     // must be an array of objects
-              //     "transforms": [{
-              //       // can be an NPM module name or a local path
-              //       "transform": "react-transform-hmr",
-              //       // see transform docs for "imports" and "locals" dependencies
-              //       "imports": ["react"],
-              //       "locals": ["module"]
-              //     }, {
-              //       // you can have many transforms, not just one
-              //       "transform": "react-transform-catch-errors",
-              //       "imports": ["react", "redbox-react"]
-              //     }]
-              //   }]
-              // ]
           }
         }
       ]

@@ -14,3 +14,6 @@
     cursor: pointer; }
     .header > i:hover {
       color: #666; }
+
+.header i {
+  display: inline-block; }
