@@ -1,5 +1,12 @@
 /**
  *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-07-20 20:41:41
+ * @version $Id$
+ */
+
+/**
+ *
  * @authors jachin (zx.wang@ctrip.com)
  * @date    2016-05-24 17:11:32
  * @describe
@@ -8,36 +15,31 @@
 
 'use strict';
 
-let path = require('path');
-let fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 
-let webpack = require('webpack');
-//let _ = require('lodash');
-let glob = require('glob');
+const webpack = require('webpack');
+const glob = require('glob');
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 //入口文件夹
-let srcDir = path.resolve(process.cwd(), 'src');
+const srcDir = path.resolve(process.cwd(), 'src');
 //发布版本文件夹
-let dist = path.resolve(process.cwd(), 'dist');
-let nodeModPath = path.resolve(__dirname, './node_modules');
-let pathMap = require('./src/libsPath.json');
+const dist = path.resolve(process.cwd(), 'dist');
+const nodeModPath = path.resolve(__dirname, './node_modules');
 
 let entries = (() => {
-  let jsDir = path.resolve(srcDir, 'js');
-  let entryFiles = glob.sync(jsDir + '/*.{js,jsx}');
+  let clientDir = path.resolve(srcDir, 'client');
+  let entryFile = glob.sync(clientDir + '/index.{js,jsx}');
   let map = {};
-
-  entryFiles.forEach((filePath) => {
+  entryFile.forEach((filePath) => {
     let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
     map[filename] = filePath;
   });
-
   return map;
 })();
 
@@ -53,52 +55,16 @@ module.exports = (options) => {
   let publicPath = '/';
   let extractCSS;
   let cssLoader;
-  let sassLoader;
-  let lessLoader;
-
-  //自动生成入口文件，入口js名必须和入口文件名相同
-  //例如：A页的入口文件是A.html,对应js目录下必须一个A.js作为入口文件
 
   let plugins = (() => {
-    let entryHtml = glob.sync(srcDir + '/*.html');
     let filesArr = [];
-
-    entryHtml.forEach((filePath) => {
-      let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
-      let conf = {
-        template: 'html!' + filePath,
-        filename: filename + '.html'
-      };
-
-      if (filename in entries) {
-        conf.inject = 'body';
-        conf.chunks = ['vender', 'common', filename];
-      }
-      //在第三项添加common-slider.js
-      if (/slider|todo/.test(filename)) {
-        conf.chunks.splice(2, 0, 'common-slider');
-      }
-
-      filesArr.push(new HtmlWebpackPlugin(conf));
-    });
     return filesArr;
   })();
-
-  //设定常用库本地加载不用每次都编译
-  // plugins.push(
-  //   new webpack.ProvidePlugin({
-  //     React: 'react',
-  //     ReactDOM: 'react-dom'
-  //   })
-  // );
 
   //dev模式
   if (dev) {
     extractCSS = new ExtractTextPlugin('css/[name].css?[contenthash]');
     cssLoader = extractCSS.extract(['css']);
-    sassLoader = extractCSS.extract(['css', 'sass']);
-    lessLoader = extractCSS.extract(['css', 'less']);
-
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
 
   } else {
@@ -112,8 +78,6 @@ module.exports = (options) => {
     });
 
     cssLoader = extractCSS.extract(['css?minimize']);
-    sassLoader = extractCSS.extract(['css?minimize'], 'sass');
-    lessLoader = extractCSS.extract(['css?minimize'], 'less');
 
     plugins.push(
       extractCSS,
@@ -154,7 +118,6 @@ module.exports = (options) => {
 
     resolve: {
       root: [srcDir, nodeModPath],
-      alias: pathMap,
       extensions: ['', '.js', '.jsx', '.css', '.scss', '.tpl', '.png', '.jpg', '.jpeg']
     },
 
@@ -167,34 +130,17 @@ module.exports = (options) => {
           //否则调用file-loader,参数直接传入
           loaders: [
             'url?limit=10000&name=img/[hash:8].[name].[ext]'
-            //'image?{bypassOndev:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
           ]
         },
         //字体
         {
           test: /\.((ttf|eot|woff|svg)(\?t=[0-9]\.[0-9]\.[0-9]))|(ttf|eot|woff|svg)\??.*$/,
-          //loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
           loader: 'url?limit=10000&name=fonts/[name].[ext]'
-        },
-        //模板
-        {
-          test: /\.(tpl|ejs)$/,
-          loader: 'ejs'
         },
         //css
         {
           test: /\.css$/,
           loader: cssLoader
-        },
-        //sass
-        {
-          test: /\.(scss|sass)$/,
-          loader: sassLoader
-        },
-        //less
-        {
-          test: /\.less$/,
-          loeader: lessLoader
         },
         //jsx
         {
@@ -202,22 +148,6 @@ module.exports = (options) => {
           loader: ['babel-loader'],
           query: {
             presets: ['es2015', 'react', 'stage-0']
-              // plugins: [
-              //   ["react-transform", {
-              //     // must be an array of objects
-              //     "transforms": [{
-              //       // can be an NPM module name or a local path
-              //       "transform": "react-transform-hmr",
-              //       // see transform docs for "imports" and "locals" dependencies
-              //       "imports": ["react"],
-              //       "locals": ["module"]
-              //     }, {
-              //       // you can have many transforms, not just one
-              //       "transform": "react-transform-catch-errors",
-              //       "imports": ["react", "redbox-react"]
-              //     }]
-              //   }]
-              // ]
           }
         }
       ]
@@ -229,21 +159,10 @@ module.exports = (options) => {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
-      // //可以自主添加提取公共部分，拆分包以免包过大
-      // new CommonsChunkPlugin({
-
-      // }),
-      // new CommonsChunkPlugin({
-      //   name: 'common-slider',
-      //   chunks: ['rSlider', 'todo']
-      // }),
-      // new CommonsChunkPlugin({
-      //   name: 'common',
-      //   chunks: ['common-slider', 'swat']
-      // }),
+      //可以自主添加提取公共部分，拆分包以免包过大
       new CommonsChunkPlugin({
         name: 'vender',
-        chunks: ['2048', 'rxCounter', 'rxReddit', 'rxTodo', 'Todo', 'rSlider']
+        chunks: ['index']
       })
 
     ].concat(plugins),
