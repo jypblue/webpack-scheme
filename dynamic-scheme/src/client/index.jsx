@@ -19,16 +19,18 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import configureStore from '../common/store/configureStore';
 import routes from '../common/utils/routes';
 
+import 'antd/dist/antd.css';
 import '../css/index.css';
 
 
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);
+
 const rootElement = document.getElementById('root');
 render(
   <Provider store={store}>
-       <Router routes={routes} history={history}/>
+    <Router routes={routes} history={history}/>
   </Provider>,
   rootElement
 );

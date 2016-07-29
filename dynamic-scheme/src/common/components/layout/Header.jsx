@@ -15,8 +15,7 @@ class Header extends Component {
       <div className="masthead">
 			<div className="container">
 			  <h3 className="masthead-title">
-			   <a href="/" title="Home">Redux Universal</a>
-			    <small>Click on menu icon to get started</small>
+			   <a href="/" title="Home">Redux Universal Application Demo </a>
 			    <span className="counter-indicator">{`Counter : ${counter}`}</span>
 			    <span className="todo-indicator">{`Todos : ${activeCount}`}</span>
 			  </h3>

@@ -8,16 +8,16 @@ import React, { Component, PropTypes } from 'react';
 
 class Counter extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props,context) {
+    super(props,context);
   }
 
   render() {
     const { incrementCounter, decrementCounter, counter } = this.props;
+    console.log(counter);
     return (
       <div className="posts">
         <h1>Counter</h1>
-        <p>This counter is here to show the state is conserved as you navigate through the app.</p>
         <p>
           <b>Counter: {counter} times</b>
           {' '}

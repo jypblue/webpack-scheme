@@ -16,7 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/jypblue/webpack-scheme.git"
   },
-  "keywords": ["react", "redux", "react-router", "react-router-redux", "express"],
+  "keywords": [
+    "react",
+    "redux",
+    "react-router",
+    "react-router-redux",
+    "express"
+  ],
   "author": "zx.wang",
   "license": "ISC",
   "bugs": {
@@ -25,11 +31,11 @@
   "homepage": "https://github.com/jypblue/webpack-scheme#readme",
   "dependencies": {
     "antd": "^1.6.5",
-    "axios": "^0.13.1",
     "classnames": "^2.2.5",
     "express": "^4.14.0",
     "history": "^2.1.2",
     "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",

@@ -1,4 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
 import classnames from 'classnames';
 import TextInput from './TextInput';
 
@@ -11,7 +14,9 @@ class Item extends Component {
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true });
+    this.setState({
+      editing: true
+    });
   }
 
   handleSave(id, text) {
@@ -20,11 +25,17 @@ class Item extends Component {
     } else {
       this.props.editTodo(id, text);
     }
-    this.setState({ editing: false });
+    this.setState({
+      editing: false
+    });
   }
 
   render() {
-    const {todo, completeTodo, deleteTodo} = this.props;
+    const {
+      todo,
+      completeTodo,
+      deleteTodo
+    } = this.props;
 
     let element;
     if (this.state.editing) {
@@ -49,22 +60,22 @@ class Item extends Component {
       );
     }
 
-    return (
-      <li className={classnames({
-        completed: todo.completed,
-        editing: this.state.editing
-      })}>
-        {element}
-      </li>
-    );
+    return ( < li className = {
+        classnames({
+          completed: todo.completed,
+          editing: this.state.editing
+        })
+      } > {
+        element
+      } < /li>);
+    }
   }
-}
 
-Item.propTypes = {
-  todo: PropTypes.object.isRequired,
-  editTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
-  completeTodo: PropTypes.func.isRequired
-};
+  Item.propTypes = {
+    todo: PropTypes.object.isRequired,
+    editTodo: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    completeTodo: PropTypes.func.isRequired
+  };
 
-export default Item;
+  export default Item;

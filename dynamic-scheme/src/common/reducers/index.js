@@ -1,9 +1,6 @@
 import {
   combineReducers
 } from 'redux';
-// import {
-//   routerStateReducer
-// } from 'redux-router';
 import {
   routerReducer
 } from 'react-router-redux';
@@ -15,10 +12,6 @@ import counter from './counter';
 import layout from './layout';
 import todos from './todos';
 import version from './version';
-import {
-  selectedReddit,
-  postsByReddit
-} from './reddit';
 
 const rootReducer = combineReducers({
   user: user,
@@ -26,8 +19,6 @@ const rootReducer = combineReducers({
   counter: undoable(counter),
   layout: undoable(layout),
   todos: undoable(todos),
-  selectedReddit: undoable(selectedReddit),
-  postsByReddit: undoable(postsByReddit),
   routing: routerReducer
 });
 

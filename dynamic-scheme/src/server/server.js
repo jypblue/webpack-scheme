@@ -11,8 +11,6 @@ import colors from 'colors';
 let path = require('path');
 let env = process.argv[2] || process.env.NODE_ENV;
 let dev = 'production' !== env;
-let viewDir = dev ? 'src' : 'dist';
-let staticDir = path.resolve(__dirname, '/../../' + (dev ? 'src' : 'dist'));
 
 import React from 'react';
 import {
@@ -36,8 +34,6 @@ import {
   getUser
 } from '../common/api/user';
 import routes from '../common/utils/routes';
-import pkg from '../../package.json';
-
 
 const app = express();
 
@@ -47,7 +43,7 @@ const renderFullPage = (html, initialState) => {
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Redux Example</title>
+        <title>Redux Demo</title>
         <link rel="stylesheet" type="text/css" href="/css/index.css">
       </head>
       <body>
@@ -101,7 +97,7 @@ app.get('/*', function(req, res) {
 
       const store = configureStore({
         user: user,
-        version: pkg.version
+        version: 1.0
       });
 
       const InitialView = (
