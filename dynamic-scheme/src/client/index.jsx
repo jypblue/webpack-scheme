@@ -19,6 +19,9 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import configureStore from '../common/store/configureStore';
 import routes from '../common/utils/routes';
 
+//import DevTools from '../common/containers/DevTools';
+
+
 import 'antd/dist/antd.css';
 import '../css/index.css';
 
@@ -30,7 +33,9 @@ const history = syncHistoryWithStore(browserHistory, store);
 const rootElement = document.getElementById('root');
 render(
   <Provider store={store}>
+  <div>
     <Router routes={routes} history={history}/>
+  </div>
   </Provider>,
   rootElement
 );
