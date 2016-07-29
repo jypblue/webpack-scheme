@@ -19,27 +19,32 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import configureStore from '../common/store/configureStore';
 import routes from '../common/utils/routes';
 
-//import DevTools from '../common/containers/DevTools';
-
-
 import 'antd/dist/antd.css';
 import '../css/index.css';
 
 
 const initialState = window.__INITIAL_STATE__;
-const store = configureStore(initialState);
+const store = configureStore(browserHistory,initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 const rootElement = document.getElementById('root');
 render(
   <Provider store={store}>
-  <div>
     <Router routes={routes} history={history}/>
-  </div>
   </Provider>,
   rootElement
 );
 
+if (process.env.NODE_ENV !== 'production') {
+  // const showDevTools = require('./showDevTools');
+  // showDevTools(store);
+  render(
+  <Provider store={store}>
+    <DevTools/>
+  </Provider>,
+  document.getElementById('devtools')
+  )
+}
 
 
 
