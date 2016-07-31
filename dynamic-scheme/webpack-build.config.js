@@ -103,6 +103,7 @@ module.exports = (options) => {
   };
 
   let config = {
+    devtool: 'inline-source-map',
     entry: Object.assign(entries, {
       //将用到的公共库，加进vender中单独提取打包
       'vender': ['react', 'react-dom']
@@ -147,8 +148,9 @@ module.exports = (options) => {
           test: /\.(jsx|js)$/,
           loader: ['babel-loader'],
           query: {
-            presets: ['es2015', 'react', 'stage-1']
-          }
+            presets: ['es2015', 'react', 'stage-0']
+          },
+          exclude: /node_modules/
         }
       ]
     },

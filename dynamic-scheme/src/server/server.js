@@ -27,13 +27,13 @@ import createLocation from 'history/lib/createLocation';
 
 import {
   fetchComponentDataBeforeRender
-} from '../common/api/fetchComponentDataBeforeRender';
-import configureStore from '../common/store/configureStore';
+} from '../common/js/api/fetchComponentDataBeforeRender';
+import configureStore from '../common/js/store/configureStore';
 
 import {
   getUser
-} from '../common/api/user';
-import routes from '../common/utils/routes';
+} from '../common/js/api/user';
+import routes from '../common/js/utils/routes';
 
 const app = express();
 
@@ -74,6 +74,7 @@ if (dev) {
 } else {
   app.use('/', express.static(__dirname + '/../../dist'));
 }
+
 
 app.get('/*', function(req, res) {
 

@@ -6,13 +6,21 @@
  */
 
 import {createStore, applyMiddleware, compose } from 'redux';
-import { reduxReactRouter } from 'redux-router';
+import {
+  routerMiddleware
+} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promiseMiddleware from '../api/promiseMiddleware';
 import rootReducer from '../reducers';
+import DevTools from '../api/DevTools';
 
-const middlewareBuilder = () => {
+
+//const finalCreateStore = compose(...middlewareBuilder())(createStore);
+
+export default function configureStore(history,initialState) {
+
+  const middlewareBuilder = () => {
   let middleware = {};
   let universalMiddleware = [thunk, promiseMiddleware];
   let allComposeElements = [];
@@ -24,13 +32,19 @@ const middlewareBuilder = () => {
       middleware = applyMiddleware(...universalMiddleware);
 
       allComposeElements = [
-        middleware
+        middleware,
+        applyMiddleware(
+        routerMiddleware(history)
+      )
       ]
 
     } else {
       middleware = applyMiddleware(...universalMiddleware, createLogger());
       allComposeElements = [
-      middleware
+      middleware,
+      applyMiddleware(
+        routerMiddleware(history)
+      )
       ]
     }
   } else {
@@ -42,10 +56,9 @@ const middlewareBuilder = () => {
   return allComposeElements;
 }
 
-const finalCreateStore = compose(...middlewareBuilder())(createStore);
+const finalCreateStore = compose(...middlewareBuilder(),DevTools.instrument())(createStore);
 
-export default function configureStore(initialState) {
-  const store =finalCreateStore(rootReducer,initialState);
+const store =finalCreateStore(rootReducer,initialState);
 
   if (module.hot) {
     // statement

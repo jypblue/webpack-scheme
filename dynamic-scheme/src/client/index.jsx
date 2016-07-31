@@ -16,11 +16,15 @@ import {
 } from 'react-router-redux';
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import configureStore from '../common/store/configureStore';
-import routes from '../common/utils/routes';
+import routes from '../common/js/utils/routes';
+import configureStore from '../common/js/store/configureStore';
+import DevTools from '../common/js/api/DevTools';
 
 import 'antd/dist/antd.css';
-import '../css/index.css';
+import '../common/css/base.css';
+import '../common/css/todo.css';
+import '../common/css/layout.css';
+import '../common/css/custom.css';
 
 
 const initialState = window.__INITIAL_STATE__;
@@ -35,16 +39,12 @@ render(
   rootElement
 );
 
-if (process.env.NODE_ENV !== 'production') {
-  // const showDevTools = require('./showDevTools');
-  // showDevTools(store);
+
+if(module.hot) {
   render(
   <Provider store={store}>
     <DevTools/>
   </Provider>,
   document.getElementById('devtools')
-  )
+)
 }
-
-
-

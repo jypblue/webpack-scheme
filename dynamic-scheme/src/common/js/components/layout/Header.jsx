@@ -12,10 +12,10 @@ class Header extends Component {
 
 
     return (
-      <div className="masthead">
-			<div className="container">
+      <div className="head masthead">
+			<div className="header container">
 			  <h3 className="masthead-title">
-			   <a href="/" title="Home">Redux Universal Application Demo </a>
+			   <a href="/" title="Home">Redux Application Demo </a>
 			    <span className="counter-indicator">{`Counter : ${counter}`}</span>
 			    <span className="todo-indicator">{`Todos : ${activeCount}`}</span>
 			  </h3>
