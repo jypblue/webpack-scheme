@@ -47,7 +47,7 @@ module.exports = (options) => {
 
   let dev = options.dev !== undefined ? options.dev : true;
   //publicPath是绝对路径
-  //release模式可以在publicPath前加"."，开发模式不能加，否则有bug，这是sass-loader的bug。
+  //release模式可以在publicPath前加"."，开发模式不能加，否则有bug。
   //dev模式的时候去掉点".",发布版本是添加".";
   let publicPath = '/';
   let extractCSS;
@@ -56,8 +56,6 @@ module.exports = (options) => {
   let lessLoader;
 
   //自动生成入口文件，入口js名必须和入口文件名相同
-  //例如：A页的入口文件是A.html,对应js目录下必须一个A.js作为入口文件
-
   let plugins = (() => {
     let entryHtml = glob.sync(srcDir + '/*.html');
     let filesArr = [];
@@ -93,12 +91,7 @@ module.exports = (options) => {
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
   } else {
     extractCSS = new ExtractTextPlugin('css/[contenthash:8].[name].min.css', {
-      //当allChunks指定为false时，css loader必须指定怎么处理
-      //additional chunk 所依赖的css,即指定‘ExtractTextPlugin.extract()’
-      //第一个参数'notExtractLoader',一般是使用style-loader
-      //extract-text-webpack-plugin
       allChunks: false
-
     });
 
     cssLoader = extractCSS.extract(['css?minimize']);
@@ -127,8 +120,6 @@ module.exports = (options) => {
       new webpack.NoErrorsPlugin()
 
     );
-
-    //plugins.push(new UglifyJsPlugin());
   };
 
   let config = {
@@ -201,9 +192,6 @@ module.exports = (options) => {
 
       // //可以自主添加提取公共部分，拆分包以免包过大
       // new CommonsChunkPlugin({
-
-      // }),
-      // new CommonsChunkPlugin({
       //   name: 'common-slider',
       //   chunks: ['rSlider', 'todo']
       // }),
@@ -230,8 +218,6 @@ module.exports = (options) => {
     }
   };
 
-  //为实现webpack-hot-middleware做相关配置
-  //https://github.com/glenjamin/webpack-hot-middleware
   if (dev) {
     ((entry) => {
       for (let key of Object.keys(entry)) {
