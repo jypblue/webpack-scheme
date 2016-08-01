@@ -10,7 +10,7 @@ use webpack and gulp to help write react redux es2015 and sass
 
 3.执行命令安装依赖包:
 
-`cd webpack-scheme/static-scheme`
+`cd webpack-scheme`
 
 `npm install`
 
@@ -58,7 +58,6 @@ use webpack and gulp to help write react redux es2015 and sass
 │   │   └── utils/            # 前端路由文件夹
 │   ├── scss/                 # scss文件夹
 │   ├── libsPath.json         # 手动配置某些模块的路径，可以加快webpack的编译速度
-│   └── tmpl/                 # 模板目录，React项目无视
 ├── webpack-build.config.js   # webpack基本配置
 ├── webpack.config.js         # 正式环境webpack配置入口
 └── webpack-dev.config.js     # 开发环境webpack配置入口
