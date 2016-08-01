@@ -14,7 +14,6 @@ class Counter extends Component {
 
   render() {
     const { incrementCounter, decrementCounter, counter } = this.props;
-    console.log(counter);
     return (
       <div className="posts">
         <h1>Counter</h1>

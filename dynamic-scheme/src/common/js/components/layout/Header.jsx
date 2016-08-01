@@ -10,14 +10,15 @@ class Header extends Component {
     );
     const activeCount = todos.length - completedCount;
 
-
     return (
-      <div className="head masthead">
-			<div className="header container">
-			  <h3 className="masthead-title">
+      <div className="head">
+			<div className="header">
+			  <h3 className="head-title">
 			   <a href="/" title="Home">Redux Application Demo </a>
-			    <span className="counter-indicator">{`Counter : ${counter}`}</span>
-			    <span className="todo-indicator">{`Todos : ${activeCount}`}</span>
+          <div className="head-indicator">
+            <span className="counter-indicator">{`Counter : ${counter}`}</span>
+            <span className="todo-indicator">{`Todos : ${activeCount}`}</span>
+          </div>
 			  </h3>
 			</div>
 		</div>

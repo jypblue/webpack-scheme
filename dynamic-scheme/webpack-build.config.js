@@ -48,7 +48,8 @@ let chunks = Object.keys(entries);
 module.exports = (options) => {
   options = options || {};
 
-  let dev = options.dev !== undefined ? options.dev : true;
+  //let dev = options.dev !== undefined ? options.dev : true;
+  let dev = (process.env.NODE_ENV === 'production' || options.dev !== undefined) ? false : true;
   //publicPath是绝对路径
   //release模式可以在publicPath前加"."，开发模式不能加，否则有bug，这是sass-loader的bug。
   //dev模式的时候去掉点".",发布版本是添加".";
@@ -64,20 +65,14 @@ module.exports = (options) => {
   //dev模式
   if (dev) {
     extractCSS = new ExtractTextPlugin('css/[name].css?[contenthash]');
-    cssLoader = extractCSS.extract(['css']);
+    cssLoader = extractCSS.extract('style', ['css']);
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
-
   } else {
-    extractCSS = new ExtractTextPlugin('css/[contenthash:8].[name].min.css', {
-      //当allChunks指定为false时，css loader必须指定怎么处理
-      //additional chunk 所依赖的css,即指定‘ExtractTextPlugin.extract()’
-      //第一个参数'notExtractLoader',一般是使用style-loader
-      //extract-text-webpack-plugin
+    extractCSS = new ExtractTextPlugin('css/[name].css', {
       allChunks: false
-
     });
 
-    cssLoader = extractCSS.extract(['css?minimize']);
+    cssLoader = extractCSS.extract('style', ['css?minimize']);
 
     plugins.push(
       extractCSS,
@@ -92,18 +87,20 @@ module.exports = (options) => {
           except: ['$', 'exports', 'require', 'import']
         }
       }),
-
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
       new webpack.optimize.DedupePlugin(),
       new webpack.NoErrorsPlugin()
 
     );
 
-    plugins.push(new UglifyJsPlugin());
-
   };
-
+  let devtool = dev ? 'inline-source-map' : 'source-map';
   let config = {
-    devtool: 'inline-source-map',
+    devtool: devtool,
     entry: Object.assign(entries, {
       //将用到的公共库，加进vender中单独提取打包
       'vender': ['react', 'react-dom']
@@ -111,9 +108,9 @@ module.exports = (options) => {
 
     output: {
       path: dist,
-      filename: dev ? '[name].js' : 'js/[chunkhash:8].[name].min.js',
-      chunkFilename: dev ? '[chunkhash:8].chunk.js' : 'js/[chunkhash:8].chunk.min.js',
-      hotUpdateChunkFilename: dev ? '[id].js' : 'js/[id].[chunkhash:8].min.js',
+      filename: '[name].js',
+      chunkFilename: 'chunk.js',
+      hotUpdateChunkFilename: '[id].js',
       publicPath: publicPath
     },
 
@@ -148,7 +145,12 @@ module.exports = (options) => {
           test: /\.(jsx|js)$/,
           loader: ['babel-loader'],
           query: {
-            presets: ['es2015', 'react', 'stage-0']
+            presets: ['es2015', 'react', 'stage-0'],
+            plugins: [
+              ['antd', {
+                'style': 'css'
+              }]
+            ]
           },
           exclude: /node_modules/
         }
@@ -156,11 +158,6 @@ module.exports = (options) => {
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
       //可以自主添加提取公共部分，拆分包以免包过大
       new CommonsChunkPlugin({
         name: 'vender',

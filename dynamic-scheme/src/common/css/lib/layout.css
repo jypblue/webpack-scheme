@@ -1,0 +1,222 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-08-01 00:27:49
+ * @version $Id$
+ */
+
+/* Wrap */
+.wrap {
+  position: relative;
+  width: 100%;
+  min-width:1180px;
+  max-width:1920px;
+  margin:0 auto;
+}
+
+/* Header
+ * 顶部header样式
+ *
+ */
+.head {
+  height:55px;
+  border-bottom: 1px solid #eee;
+}
+
+.head .head-title{
+  position:relative;
+  text-align:center;
+}
+
+.head .head-title a {
+  text-decoration:none;
+  color:#666;
+}
+
+.head-title small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #c0c0c0;
+  letter-spacing: 0;
+  margin-left:10px;
+}
+
+
+/* Sidebar
+ * 左侧导航栏
+ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -240px;
+  width: 240px;
+  visibility: hidden;
+  overflow-y: auto;
+  font-size: 14px;
+  color: rgba(255,255,255,.6);
+  background-color: #404040;
+  -webkit-transition: all .3s ease-in-out;
+          transition: all .3s ease-in-out;
+}
+
+/* Sidebar top title
+ * 顶部描述文字
+ */
+.sidebar a {
+  font-weight: normal;
+  color: #fff;
+}
+.sidebar-item {
+  padding: 16px;
+}
+.sidebar-item p{
+  padding-left:10px;
+}
+.sidebar-item p b {
+   color:#fff;
+}
+
+/* Sidebar-toggle
+ *  侧栏展开收缩
+ */
+.sidebar-toggle {
+  position: absolute;
+  top:  10px;
+  left: 16px;
+  display: block;
+  padding: 4px 6px;
+  color: #505050;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sidebar-toggle:before {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  content: "";
+  background-image: -webkit-linear-gradient(to bottom, #555, #555 20%, #fff 20%, #fff 40%, #555 40%, #555 60%, #fff 60%, #fff 80%, #555 80%, #555 100%);
+  background-image:    -moz-linear-gradient(to bottom, #555, #555 20%, #fff 20%, #fff 40%, #555 40%, #555 60%, #fff 60%, #fff 80%, #555 80%, #555 100%);
+  background-image:     -ms-linear-gradient(to bottom, #555, #555 20%, #fff 20%, #fff 40%, #555 40%, #555 60%, #fff 60%, #fff 80%, #555 80%, #555 100%);
+  background-image:         linear-gradient(to bottom, #555, #555 20%, #fff 20%, #fff 40%, #555 40%, #555 60%, #fff 60%, #fff 80%, #555 80%, #555 100%);
+}
+
+.open .sidebar-toggle:active,
+.open .sidebar-toggle,
+.open .sidebar-toggle {
+  color: #fff;
+  background-color: #555;
+}
+
+.open .sidebar-toggle:active:before,
+.open .sidebar-toggle:before,
+.open .sidebar-toggle:before {
+  background-image: -webkit-linear-gradient(to bottom, #fff, #fff 20%, #555 20%, #555 40%, #fff 40%, #fff 60%, #555 60%, #555 80%, #fff 80%, #fff 100%);
+  background-image:    -moz-linear-gradient(to bottom, #fff, #fff 20%, #555 20%, #555 40%, #fff 40%, #fff 60%, #555 60%, #555 80%, #fff 80%, #fff 100%);
+  background-image:     -ms-linear-gradient(to bottom, #fff, #fff 20%, #555 20%, #555 40%, #fff 40%, #fff 60%, #555 60%, #555 80%, #fff 80%, #fff 100%);
+  background-image:         linear-gradient(to bottom, #fff, #fff 20%, #555 20%, #555 40%, #fff 40%, #fff 60%, #555 60%, #555 80%, #fff 80%, #fff 100%);
+}
+
+
+.wrap,
+.sidebar,
+.sidebar-toggle {
+  -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.wrap,
+.sidebar-toggle {
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out;
+}
+
+.open .sidebar-toggle,
+.open .sidebar,
+.open .wrap{
+  z-index: 10;
+  visibility: visible;
+  -webkit-transform: translateX(240px);
+      -ms-transform: translateX(240px);
+          transform: translateX(240px);
+}
+
+
+/* undo && redo
+ * 撤销操作和重新操作按钮样式
+ */
+.undo-button,
+.redo-button {
+   position: absolute;
+   top: 70px;
+   left: 24px;
+   display: block;
+   padding: 0;
+   font-size:14px;
+   color: #505050;
+   border-radius: 4px;
+   cursor: pointer;
+   line-height: 0;
+   transition: transform .3s ease-in-out;
+}
+
+.redo-button {
+   left:45px;
+}
+
+.undo-button:hover,
+.redo-button:hover {
+   color:#268bd2;
+}
+
+.open .undo-button,
+.open .redo-button {
+   z-index: 10;
+   -webkit-transform: translateX(240px);
+   -ms-transform: translateX(240px);
+   transform: translateX(240px);
+}
+
+/* 顶部todo 及counter 统计 */
+.head-indicator {
+  position:absolute;
+  right: 50px;
+  top: 0;
+}
+
+.counter-indicator,
+.todo-indicator {
+  display:inline-block;
+  font-size:10px;
+  padding:2px 4px;
+  border-radius:4px;
+  text-transform:uppercase;
+  color:#fff;
+  background:#268bd2;
+  margin-left:4px;
+}
+
+.todo-indicator {
+   top:25px;
+}
+
+/* Container 主体容器部分 */
+.container {
+  max-width: 900px;
+  padding: 40px 20px 0 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

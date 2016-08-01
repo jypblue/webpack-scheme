@@ -17,6 +17,7 @@ import {
   renderToString
 } from 'react-dom/server';
 import {
+  createMemoryHistory,
   RouterContext,
   match
 } from 'react-router';
@@ -24,6 +25,10 @@ import {
   Provider
 } from 'react-redux';
 import createLocation from 'history/lib/createLocation';
+import {
+  syncHistoryWithStore
+} from 'react-router-redux';
+require('object-assign');
 
 import {
   fetchComponentDataBeforeRender
@@ -78,15 +83,24 @@ if (dev) {
 
 app.get('/*', function(req, res) {
 
-  const location = createLocation(req.url);
+  //const location = createLocation(req.url);
+
   getUser(user => {
     if (!user) {
-      // statement
       return res.status(401).end('Not Authorised');
     }
+
+    const memoryHistory = createMemoryHistory(req.url);
+    const store = configureStore(memoryHistory, {
+      user: user,
+      version: "1.0.0"
+    });
+    const history = syncHistoryWithStore(memoryHistory, store)
+
     match({
+      history,
       routes,
-      location
+      location: req.url
     }, (err, redirectLocation, renderProps) => {
       if (err) {
         console.error(err);
@@ -96,16 +110,12 @@ app.get('/*', function(req, res) {
       if (!renderProps) {
         return res.status(404).end('Not found');
       }
-
-      const store = configureStore({
-        user: user,
-        version: 1.0
-      });
-
+      // {...renderProps}
+      //const rprops = Object.assign({}, renderProps);
       const InitialView = (
         <div>
         <Provider store={store}>
-          <RouterContext {...renderProps} />
+          <RouterContext  {...renderProps} />
         </Provider>
         </div>
       );

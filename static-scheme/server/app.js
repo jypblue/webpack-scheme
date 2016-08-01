@@ -25,7 +25,6 @@ let env = process.argv[2] || process.env.NODE_ENV;
 let dev = 'production' !== env;
 let viewDir = dev ? 'src' : 'dist';
 let staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
-
 //加载routes
 let routes = require('./routes/routes.js');
 

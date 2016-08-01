@@ -91,7 +91,6 @@ module.exports = (options) => {
     lessLoader = extractCSS.extract(['css', 'less']);
 
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
-
   } else {
     extractCSS = new ExtractTextPlugin('css/[contenthash:8].[name].min.css', {
       //当allChunks指定为false时，css loader必须指定怎么处理
@@ -119,18 +118,21 @@ module.exports = (options) => {
           except: ['$', 'exports', 'require', 'import']
         }
       }),
-
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
       new webpack.optimize.DedupePlugin(),
       new webpack.NoErrorsPlugin()
 
     );
 
-    plugins.push(new UglifyJsPlugin());
-
+    //plugins.push(new UglifyJsPlugin());
   };
 
   let config = {
-    devtool: 'inline-source-map',
+    //devtool: 'inline-source-map',
     entry: Object.assign(entries, {
       //将用到的公共库，加进vender中单独提取打包
       'vender': ['react', 'react-dom']
@@ -185,7 +187,7 @@ module.exports = (options) => {
         },
         //jsx
         {
-          test: /\.jsx?$/,
+          test: /\.(jsx|js)$/,
           loader: ['babel-loader'],
           query: {
             presets: ['es2015', 'react', 'stage-0']
@@ -196,11 +198,7 @@ module.exports = (options) => {
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
+
       // //可以自主添加提取公共部分，拆分包以免包过大
       // new CommonsChunkPlugin({
 

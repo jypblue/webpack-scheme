@@ -15,6 +15,7 @@ import * as LayoutActions from '../actions/layout';
 import Home from '../components/Home';
 import Header from '../components/layout/Header';
 import Sidebar from '../components/layout/Sidebar';
+import { Icon } from 'antd';
 
 class App extends Component {
   constructor(props,context) {
@@ -55,8 +56,8 @@ class App extends Component {
         </div>
       </div>
       <label className="sidebar-toggle" onClick={this.eventToggleSidebar}></label>
-      <label className="undo-button" onClick={this.eventUndo}>&lt;</label>
-      <label className="redo-button" onClick={this.eventRedo}>&gt;</label>
+      <label className="undo-button" onClick={this.eventUndo}><span><Icon type="menu-fold" /></span></label>
+      <label className="redo-button" onClick={this.eventRedo}><span><Icon type="menu-unfold" /></span></label>
     </div>
     );
   }

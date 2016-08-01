@@ -7,9 +7,9 @@
 import 'babel-polyfill';
 
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import { Router,  browserHistory } from 'react-router';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import {
   syncHistoryWithStore,
   routerReducer
@@ -21,10 +21,9 @@ import configureStore from '../common/js/store/configureStore';
 import DevTools from '../common/js/api/DevTools';
 
 import 'antd/dist/antd.css';
-import '../common/css/base.css';
-import '../common/css/todo.css';
-import '../common/css/layout.css';
-import '../common/css/custom.css';
+import '../common/css/core/reset.css';
+import '../common/css/lib/layout.css';
+import '../common/css/ui/todo.css';
 
 
 const initialState = window.__INITIAL_STATE__;
@@ -34,13 +33,15 @@ const history = syncHistoryWithStore(browserHistory, store);
 const rootElement = document.getElementById('root');
 render(
   <Provider store={store}>
-    <Router routes={routes} history={history}/>
+    <div>
+      <Router routes={routes} history={history} />
+    </div>
   </Provider>,
   rootElement
 );
 
 
-if(module.hot) {
+if(process.env.NODE_ENV !== 'production') {
   render(
   <Provider store={store}>
     <DevTools/>

@@ -15,9 +15,6 @@ import promiseMiddleware from '../api/promiseMiddleware';
 import rootReducer from '../reducers';
 import DevTools from '../api/DevTools';
 
-
-//const finalCreateStore = compose(...middlewareBuilder())(createStore);
-
 export default function configureStore(history,initialState) {
 
   const middlewareBuilder = () => {
