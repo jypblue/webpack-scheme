@@ -1,4 +1,4 @@
-## static-scheme
+## webpack-scheme
 use webpack and gulp to help write react redux es2015 and sass
 
 ### webpack构建React,Redux,Sass,Es2015前端原型脚手架
