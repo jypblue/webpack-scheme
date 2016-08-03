@@ -41,6 +41,8 @@ gulp.task('clean', ['lint'], () => {
   }).pipe(clean());
 });
 
+//webpack dll 预留
+
 //run webpack
 gulp.task('pack', ['clean'], (done) => {
   //开发版本webpackdevconf,生产版本webpackconf
