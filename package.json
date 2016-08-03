@@ -7,7 +7,6 @@
         "dev": "node server/app",
         "build": "gulp",
         "release": "node server/app production",
-        "deploy": "gulp deploy",
         "test": "mocha --compilers js:babel-register --recursive",
         "test:watch": "npm test -- --watch"
     },

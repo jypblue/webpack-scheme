@@ -12,8 +12,7 @@
     }
   },
   "globals": {
-    "angular": true,
-        "__DEV__"      : false,
+    "__DEV__"      : false,
     "__PROD__"     : false,
     "__DEBUG__"    : false,
     "__DEBUG_NW__" : false,
@@ -25,13 +24,11 @@
     "brace-style": [2, "1tbs"],
     "quotes": [2, "single"],
     "semi": [2, "always"],
-    //"space-in-brackets": [2, "never"],
     "space-infix-ops": 2,
         "strict": 0,
     "max-len": [1, 120, 2, {
       "ignoreComments": true
     }],
-    //"react/jsx-indent-props": [2, 4],
     "no-console": 0,
     "new-cap": 0,
     "no-undef": [2],
