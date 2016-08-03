@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "node server/app",
         "build": "gulp",
+        "build:dll": "webpack --config webpack.dll.js",
         "release": "node server/app production",
         "test": "mocha --compilers js:babel-register --recursive",
         "test:watch": "npm test -- --watch"

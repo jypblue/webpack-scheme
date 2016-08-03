@@ -8,24 +8,24 @@
 
 'use strict';
 
-let path = require('path');
-let fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 
-let webpack = require('webpack');
-let glob = require('glob');
+const webpack = require('webpack');
+const glob = require('glob');
 
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-let UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 //入口文件夹
-let srcDir = path.resolve(process.cwd(), 'src');
+const srcDir = path.resolve(process.cwd(), 'src');
 //发布版本文件夹
-let dist = path.resolve(process.cwd(), 'dist');
-let nodeModPath = path.resolve(__dirname, './node_modules');
-let pathMap = require('./src/libsPath.json');
+const dist = path.resolve(process.cwd(), 'dist');
+const nodeModPath = path.resolve(__dirname, './node_modules');
+const pathMap = require('./src/libsPath.json');
 
 let entries = (() => {
   let jsDir = path.resolve(srcDir, 'js');
@@ -45,7 +45,8 @@ let chunks = Object.keys(entries);
 module.exports = (options) => {
   options = options || {};
 
-  let dev = options.dev !== undefined ? options.dev : true;
+  //let dev = options.dev !== undefined ? options.dev : true;
+  let dev = (process.env.NODE_ENV === 'production' || options.dev !== undefined) ? false : true;
   //publicPath是绝对路径
   //release模式可以在publicPath前加"."，开发模式不能加，否则有bug。
   //dev模式的时候去掉点".",发布版本是添加".";
@@ -90,7 +91,7 @@ module.exports = (options) => {
 
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
   } else {
-    extractCSS = new ExtractTextPlugin('css/[contenthash:8].[name].min.css', {
+    extractCSS = new ExtractTextPlugin('css/[name].min.[contenthash:8].css', {
       allChunks: false
     });
 
@@ -116,6 +117,12 @@ module.exports = (options) => {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
+
+      //dll
+      // new webpack.DllReferencePlugin({
+      //   context: path.join(__dirname, "dll"),
+      //   manifest: require("./dll/vendor-manifest.json")
+      // }),
       new webpack.optimize.DedupePlugin(),
       new webpack.NoErrorsPlugin()
 
@@ -131,9 +138,9 @@ module.exports = (options) => {
 
     output: {
       path: dist,
-      filename: dev ? '[name].js' : 'js/[chunkhash:8].[name].min.js',
-      chunkFilename: dev ? '[chunkhash:8].chunk.js' : 'js/[chunkhash:8].chunk.min.js',
-      hotUpdateChunkFilename: dev ? '[id].js' : 'js/[id].[chunkhash:8].min.js',
+      filename: dev ? '[name].js' : 'js/[name].min.[chunkhash:8].js',
+      chunkFilename: dev ? 'chunk.[chunkhash:8].js' : 'js/chunk.min.[chunkhash:8].js',
+      hotUpdateChunkFilename: dev ? '[id].js' : 'js/[id].min.[chunkhash:8].js',
       publicPath: publicPath
     },
 
@@ -151,14 +158,14 @@ module.exports = (options) => {
           //url-loader图片小于10k自动转成dataUrl，
           //否则调用file-loader,参数直接传入
           loaders: [
-            'url?limit=10000&name=img/[hash:8].[name].[ext]'
+            'url?limit=10000&name=img/[name].[hash:8].[ext]'
             //'image?{bypassOndev:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
           ]
         },
         //字体
         {
           test: /\.((ttf|eot|woff|svg)(\?t=[0-9]\.[0-9]\.[0-9]))|(ttf|eot|woff|svg)\??.*$/,
-          //loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
+          //loader: 'url?limit=10000&name=fonts/[name].[hash:8].[ext]'
           loader: 'url?limit=10000&name=fonts/[name].[ext]'
         },
         //css
@@ -197,7 +204,7 @@ module.exports = (options) => {
       // }),
       // new CommonsChunkPlugin({
       //   name: 'common',
-      //   chunks: ['common-slider', 'swat']
+      //   chunks: ['Todo', 'rSlider']
       // }),
       new CommonsChunkPlugin({
         name: 'vender',
