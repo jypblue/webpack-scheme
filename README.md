@@ -77,8 +77,8 @@ use webpack and gulp to help write react redux es2015 and sass
 ### 若对你有用，欢迎star,或者watch;  welcome to star or watch.
 
 
-#### 注
-#####后续工作
+
+#### 注：后续工作
 1. 添加webpack.dll拆分包
 2. ...
 
