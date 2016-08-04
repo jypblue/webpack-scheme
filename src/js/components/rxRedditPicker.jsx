@@ -6,22 +6,29 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import { Select } from 'antd';
+const Option = Select.Option;
 
 export default class Picker extends Component {
+
   render() {
     const { value, onChange, options } = this.props;
-
     return (
       <span>
         <h1>{value}</h1>
-        <select onChange={ e => onChange(e.target.value)} value={value}>
+        <Select onChange={this.handleChange.bind(this)} defaultValue={value}  style={{width:120,marginTop:8,marginBottom:8}}>
         { options.map(option =>
-          <option value={option} key={option}>
+          <Option value={option} key={option}>
           {option}
-          </option>)}
-        </select>
+          </Option>)}
+        </Select>
       </span>
     )
+  }
+
+  handleChange(value) {
+      console.log(`selected ${value}`);
+      this.props.onChange(value);
   }
 }
 

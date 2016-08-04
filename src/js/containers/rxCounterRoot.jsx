@@ -12,6 +12,7 @@ import {
 } from 'react-redux';
 import CounterApp from './rxCounterApp';
 
+
 export default class CounterRoot extends Component {
   render() {
     const {
@@ -19,7 +20,7 @@ export default class CounterRoot extends Component {
     } = this.props;
     return (
       <Provider store={store}>
-        <CounterApp />
+        <CounterApp/>
       </Provider>
     )
   }

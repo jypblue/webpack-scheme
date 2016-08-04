@@ -9,7 +9,7 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import RedditRoot from './containers/rxRedditRoot';
-
+import 'antd/dist/antd.css';
 render(
   <RedditRoot />,
   document.getElementById('root')

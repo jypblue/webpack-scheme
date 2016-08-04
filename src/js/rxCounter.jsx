@@ -9,6 +9,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import configureStore from './store/rxCounterConfigureStore';
 import CounterRoot from './containers/rxCounterRoot';
+import 'antd/dist/antd.css';
 
 const store = configureStore();
 

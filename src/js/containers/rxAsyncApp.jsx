@@ -48,7 +48,7 @@ class AsyncApp extends Component {
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
 
     return (
-      <div>
+      <div style={{marginLeft:8}}>
         <Picker value={selectedSubreddit}
           onChange={this.handleChange}
           options={['reactjs','frontend']}/>
