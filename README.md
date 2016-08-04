@@ -80,7 +80,8 @@ use webpack and gulp to help write react redux es2015 and sass
 
 #### 注：后续工作
 1. 添加webpack.dll拆分包
-2. ...
+2. 后端添加多路由，每个页面对应一个url
+3. ...
 
 
 
