@@ -45,8 +45,8 @@ let chunks = Object.keys(entries);
 module.exports = (options) => {
   options = options || {};
 
-  //let dev = options.dev !== undefined ? options.dev : true;
-  let dev = (process.env.NODE_ENV === 'production' || options.dev !== undefined) ? false : true;
+  let dev = options.dev !== undefined ? options.dev : true;
+  //let dev = (process.env.NODE_ENV === 'production' || options.dev !== undefined) ? false : true;
   //publicPath是绝对路径
   //release模式可以在publicPath前加"."，开发模式不能加，否则有bug。
   //dev模式的时候去掉点".",发布版本是添加".";
@@ -188,7 +188,12 @@ module.exports = (options) => {
           test: /\.(jsx|js)$/,
           loader: ['babel-loader'],
           query: {
-            presets: ['es2015', 'react', 'stage-0']
+            presets: ['es2015', 'react', 'stage-0'],
+            plugins: [
+              ['antd', {
+                'style': 'css'
+              }]
+            ]
           },
           exclude: /node_modules/
         }
