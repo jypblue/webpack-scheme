@@ -4,7 +4,7 @@ use webpack and gulp to help write react redux es2015 and sass
 ### webpack构建React,Redux,Sass,Es2015前端原型脚手架
 
 #### 1. 环境配置
-1.安装node版本4.0以上
+1.安装node版本6.0以上
 
 2.clone或者download本工程到本地
 
