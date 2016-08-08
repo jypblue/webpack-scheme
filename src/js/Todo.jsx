@@ -9,8 +9,8 @@
 
 import React, {Component} from 'react';
 import { render } from 'react-dom';
-import 'resetCss';
-import 'commonCss';
+import '../css/reset.css';
+import '../css/common.css';
 require('../css/components/todo.css');
 
 import LocalDb from './store/localDb.js';

@@ -25,7 +25,7 @@ const srcDir = path.resolve(process.cwd(), 'src');
 //发布版本文件夹
 const dist = path.resolve(process.cwd(), 'dist');
 const nodeModPath = path.resolve(__dirname, './node_modules');
-const pathMap = require('./src/libsPath.json');
+//const pathMap = require('./src/libsPath.json');
 
 let entries = (() => {
   let jsDir = path.resolve(srcDir, 'js');
@@ -146,7 +146,7 @@ module.exports = (options) => {
 
     resolve: {
       root: [srcDir, nodeModPath],
-      alias: pathMap,
+      //alias: pathMap,
       extensions: ['', '.js', '.jsx', '.css', '.scss', '.tpl', '.png', '.jpg', '.jpeg']
     },
 

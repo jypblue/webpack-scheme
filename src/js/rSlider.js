@@ -9,8 +9,8 @@ import React from 'react';
 import {
   render
 } from 'react-dom';
-require('resetCss');
-require('commonCss');
+require('../css/reset.css');
+require('../css/common.css');
 
 
 import Slider from './components/Slider';
