@@ -2,7 +2,7 @@
  * @Author: jypblue
  * @Date:   2016-08-03 23:15:19
  * @Last Modified by:   jypblue
- * @Last Modified time: 2016-08-04 11:36:40
+ * @Last Modified time: 2016-08-10 12:28:12
  */
 
 'use strict';
@@ -25,4 +25,4 @@ render(
     <InputApp />
   </Provider>,
   document.getElementById('root')
-)
+);

@@ -6,9 +6,6 @@
  */
 
 import React, { Component } from 'react';
-require('../../fonts/iconfont.css');
-require('../../css/components/Slider.css');
-
 import SliderItem from './SliderItem';
 import SliderDots from './SliderDots';
 import SliderArrows from './SliderArrows';

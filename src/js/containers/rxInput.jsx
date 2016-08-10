@@ -13,7 +13,7 @@ import {
   connect
 } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import InputApp from '../components/rxInput';
+import InputApp from '../components/RxInput/rxInput';
 import * as action from '../actions/rxInputActions';
 
 function mapStateToProps(state) {

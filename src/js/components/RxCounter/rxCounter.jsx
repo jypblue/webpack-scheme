@@ -6,7 +6,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import {Button} from 'antd';
+import {Button,Input} from 'antd';
 
 export default class Counter extends Component {
   static propTypes = {
@@ -18,13 +18,11 @@ export default class Counter extends Component {
 
   render() {
     const { increment, incrementIfOdd, decrement , counter,incrementAsync } = this.props;
-
     return (
       <p>
-        Clicked: {counter} times
         {' '}
         <Button type="primary" onClick={increment}> + </Button>
-        {' '}
+        <Input value={counter} style={{width:40,textAlign:'center',verticalAlign:'middle'}}/>
         <Button  onClick={decrement}> - </Button>
         {' '}
         <Button type="ghost" onClick={incrementIfOdd}> IncrementIfOdd if odd </Button>

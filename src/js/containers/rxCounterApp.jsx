@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Counter from '../components/rxCounter';
+import Counter from '../components/RxCounter/rxCounter';
 import * as CounterActions from '../actions/rxCounterActions';
 
 class CounterApp extends Component {

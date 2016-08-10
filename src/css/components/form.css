@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-08-09 15:43:57
+ * @version $Id$
+ */
+.pic-choose {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.pic-choose input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}

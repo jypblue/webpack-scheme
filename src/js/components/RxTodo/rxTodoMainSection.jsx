@@ -7,7 +7,7 @@
 import React, { Component, PropTypes } from 'react';
 import TodoItem from './rxTodoItem';
 import Footer from './rxFooter';
-import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/rxTodoFilters';
+import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../../constants/rxTodoFilters';
 
 
 const TODO_FILTERS = {

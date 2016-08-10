@@ -25,7 +25,7 @@ const srcDir = path.resolve(process.cwd(), 'src');
 //发布版本文件夹
 const dist = path.resolve(process.cwd(), 'dist');
 const nodeModPath = path.resolve(__dirname, './node_modules');
-//const pathMap = require('./src/libsPath.json');
+const pathMap = require('./src/libspath.json');
 
 let entries = (() => {
   let jsDir = path.resolve(srcDir, 'js');
@@ -68,13 +68,14 @@ module.exports = (options) => {
         filename: filename + '.html'
       };
 
+      // 添加chunk模块，以及html中引入顺序
       if (filename in entries) {
         conf.inject = 'body';
         conf.chunks = ['vender', 'common', filename];
       }
-      //在第三项添加common-slider.js
-      if (/slider|todo/.test(filename)) {
-        conf.chunks.splice(2, 0, 'common-slider');
+
+      if (filename.indexOf('rx') !== -1) {
+        //conf.chunks.splice(2, 0, 'redux');
       }
 
       filesArr.push(new HtmlWebpackPlugin(conf));
@@ -131,10 +132,11 @@ module.exports = (options) => {
 
   let config = {
     //devtool: 'inline-source-map',
-    entry: Object.assign(entries, {
+    entry: Object.assign({
       //将用到的公共库，加进vender中单独提取打包
-      'vender': ['react', 'react-dom']
-    }),
+      'vender': ['react', 'react-dom', 'redux', 'react-redux'],
+      'redux': ['redux', 'react-redux']
+    }, entries),
 
     output: {
       path: dist,
@@ -146,7 +148,7 @@ module.exports = (options) => {
 
     resolve: {
       root: [srcDir, nodeModPath],
-      //alias: pathMap,
+      alias: pathMap,
       extensions: ['', '.js', '.jsx', '.css', '.scss', '.tpl', '.png', '.jpg', '.jpeg']
     },
 
@@ -204,22 +206,23 @@ module.exports = (options) => {
 
       // //可以自主添加提取公共部分，拆分包以免包过大
       // new CommonsChunkPlugin({
-      //   name: 'common-slider',
-      //   chunks: ['rSlider', 'todo']
-      // }),
-      // new CommonsChunkPlugin({
-      //   name: 'common',
-      //   chunks: ['Todo', 'rSlider']
+      //   name: 'redux',
+      //   chunks: ['rxInput', 'rxCounter']
       // }),
       new CommonsChunkPlugin({
-        name: 'vender',
-        chunks: ['2048', 'rxCounter', 'rxReddit', 'rxTodo', 'Todo', 'rSlider']
+        names: ['vender'],
+        minChunks: Infinity,
+        //chunks: ['rxInput', 'rxCounter', 'rxTodo', 'Tabs', 'rxReddit']
       })
+      // new CommonsChunkPlugin({
+      //   name: 'vender',
+      //   chunks: ['2048', 'formUpload', 'rSlider', 'Todo']
+      // })
 
     ].concat(plugins),
 
     devServer: {
-      hot: true,
+      //hot: true,
       noInfo: false,
       inline: true,
       publicPath: publicPath,

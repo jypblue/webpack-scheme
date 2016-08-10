@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-08-09 13:06:44
+ * @version $Id$
+ */
+
+.tabs{
+  width:600px;
+  margin: 0 auto;
+}
+.tabs-nav li{
+  display:inline-block;
+  text-align: center;
+  width: 33.3%;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border-bottom:1px solid #ddd;
+  margin: 4px 0;
+
+  &.active {
+    border-bottom: 1px solid #2db7f5;
+  }
+}
+
+.tabs-content{
+  width: 100%;
+  padding-top: 20px;
+}
+.tabs-tabpane{
+  display: none;
+  text-align: center;
+}
+.show{
+  display: block;
+}

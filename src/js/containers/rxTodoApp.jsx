@@ -8,8 +8,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Header from '../components/rxTodoHeader';
-import MainSection from '../components/rxTodoMainSection';
+import Header from '../components/RxTodo/rxTodoHeader';
+import MainSection from '../components/RxTodo/rxTodoMainSection';
 import * as TodoActions from '../actions/rxTodoActions';
 
 class TodoApp extends Component {

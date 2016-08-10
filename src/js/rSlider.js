@@ -9,15 +9,17 @@ import React from 'react';
 import {
   render
 } from 'react-dom';
-require('../css/reset.css');
-require('../css/common.css');
+require('resetCss');
+require('commonCss');
+require('../fonts/iconfont.css');
+require('../css/components/Slider.css');
 
 
-import Slider from './components/Slider';
+import Slider from './components/Slider/Slider';
 
 
 require.ensure([], function(require) {
-  let Slider = require('./components/Slider');
+  let Slider = require('./components/Slider/Slider');
 
 });
 
@@ -34,6 +36,13 @@ const imagedata = [{
 }];
 
 render(
-  <Slider effect="left" items={ imagedata } speed={0.8} delay={1.2} pause={true} autoplay={true} dots={true} arrows={true} />,
+  <Slider effect="left"
+    items={ imagedata }
+    speed={0.8}
+    delay={1.2}
+    pause={true}
+    autoplay={true}
+    dots={true}
+    arrows={true} />,
   document.querySelector('.container')
-)
+);

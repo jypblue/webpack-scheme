@@ -6,7 +6,7 @@
  */
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
-import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../constants/rxTodoFilters';
+import { SHOW_ALL, SHOW_MARKED, SHOW_UNMARKED } from '../../constants/rxTodoFilters';
 
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',

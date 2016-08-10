@@ -2,7 +2,7 @@
  * @Author: jypblue
  * @Date:   2016-08-03 23:24:27
  * @Last Modified by:   jypblue
- * @Last Modified time: 2016-08-04 01:05:48
+ * @Last Modified time: 2016-08-10 12:30:06
  */
 
 'use strict';
@@ -21,7 +21,7 @@ function rxinput(state, action) {
       };
     default:
       return {
-        value: "default"
+        value: 'default'
       };
   }
 }

@@ -15,9 +15,9 @@ require('../css/components/todo.css');
 
 import LocalDb from './store/localDb.js';
 
-import TodoHeader from './components/TodoHeader.jsx';
-import TodoMain from './components/TodoMain.jsx';
-import TodoFooter from './components/TodoFooter.jsx';
+import TodoHeader from './components/Todo/TodoHeader.jsx';
+import TodoMain from './components/Todo/TodoMain.jsx';
+import TodoFooter from './components/Todo/TodoFooter.jsx';
 
 class Todos extends Component {
 
