@@ -134,7 +134,7 @@ module.exports = (options) => {
     //devtool: 'inline-source-map',
     entry: Object.assign({
       //将用到的公共库，加进vender中单独提取打包
-      'vender': ['react', 'react-dom', 'redux', 'react-redux'],
+      'vender': ['react', 'react-dom'],
       'redux': ['redux', 'react-redux']
     }, entries),
 
@@ -211,8 +211,8 @@ module.exports = (options) => {
       // }),
       new CommonsChunkPlugin({
         names: ['vender'],
-        minChunks: Infinity,
-        //chunks: ['rxInput', 'rxCounter', 'rxTodo', 'Tabs', 'rxReddit']
+        minChunks: Infinity
+          //chunks: ['rxInput', 'rxCounter', 'rxTodo', 'Tabs', 'rxReddit']
       })
       // new CommonsChunkPlugin({
       //   name: 'vender',
