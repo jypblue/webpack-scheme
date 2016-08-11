@@ -4,7 +4,7 @@
  * @date    2016-07-12 10:42:14
  * @version $Id$
  */
-//import 'babel-polyfill';
+import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
 import configureStore from './store/rxCounterConfigureStore';
