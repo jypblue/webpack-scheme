@@ -42,8 +42,17 @@ function fetchPosts(subreddit) {
   return dispatch => {
     dispatch(requestPosts(subreddit));
     return fetch(`http://www.subreddit.com/r/${subreddit}.json`)
-    .then(response => response.json())
-    .then(json => dispatch(receivePosts(subreddit, json)))
+    .then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        console.log(response)
+        return response.json();
+    })
+    .then(function(json) {
+      console.log(json);
+      return dispatch(receivePosts(subreddit, json))
+    })
   }
 }
 
