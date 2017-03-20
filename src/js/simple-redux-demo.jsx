@@ -24,27 +24,27 @@ class Counter extends Component {
     const {
       value,
       onIncreaseClick
-    } = this.props
+    } = this.props;
     return (
       <div>
         <span>{value}</span>
         <button onClick={onIncreaseClick}>Increase</button>
       </div>
-    )
+    );
   }
 }
 
 Counter.propTypes = {
   value: PropTypes.number.isRequired,
   onIncreaseClick: PropTypes.func.isRequired
-}
+};
 
 
 //Action
 //描述已发生事件的普通对象
 const increaseAction = {
   type: 'increase'
-}
+};
 
 //Reducer 更新state
 //接受state和action,返回新的state。用于描述action如何改变state tree的
@@ -72,7 +72,7 @@ const store = createStore(counter);
 function mapStateToProps(state) {
   return {
     value: state.count
-  }
+  };
 }
 
 //Map redux actions to Component props
@@ -80,18 +80,18 @@ function mapStateToProps(state) {
 function mapDispathToProps(dispatch) {
   return {
     onIncreaseClick: () => dispatch(increaseAction)
-  }
+  };
 }
 
 //Connected Component
 const App = connect(
   mapStateToProps,
   mapDispathToProps
-)(Counter)
+)(Counter);
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')
-)
+);

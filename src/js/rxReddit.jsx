@@ -13,4 +13,4 @@ import 'antd/dist/antd.css';
 render(
   <RedditRoot />,
   document.getElementById('root')
-)
+);

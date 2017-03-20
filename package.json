@@ -1,5 +1,5 @@
 {
-  "name": "static-scheme",
+  "name": "webpack-scheme",
   "version": "1.0.0",
   "description": "use webpack and gulp to help write code like react es6 and sass",
   "main": "webpack-build.config.js",
