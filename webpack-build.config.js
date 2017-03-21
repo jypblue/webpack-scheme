@@ -28,7 +28,7 @@ const nodeModPath = path.resolve(__dirname, './node_modules');
 const pathMap = require('./src/libspath.json');
 
 let entries = (() => {
-  let jsDir = path.resolve(srcDir, 'js');
+  const jsDir = path.resolve(srcDir, 'js');
   let entryFiles = glob.sync(jsDir + '/*.{js,jsx}');
   let map = {};
 
@@ -45,12 +45,12 @@ let chunks = Object.keys(entries);
 module.exports = (options) => {
   options = options || {};
 
-  let dev = options.dev !== undefined ? options.dev : true;
+  const dev = options.dev !== undefined ? options.dev : true;
   //let dev = (process.env.NODE_ENV === 'production' || options.dev !== undefined) ? false : true;
   //publicPath是绝对路径
   //release模式可以在publicPath前加"."，开发模式不能加，否则有bug。
   //dev模式的时候去掉点".",发布版本是添加".";
-  let publicPath = '/';
+  const publicPath = '/';
   let extractCSS;
   let cssLoader;
   let sassLoader;

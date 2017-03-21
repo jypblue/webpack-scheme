@@ -6,27 +6,27 @@
  * @version $Id$
  */
 
-"use strict";
+'use strict';
 //加载node模块
-let http = require('http');
-let path = require('path');
-let util = require('util');
+const http = require('http');
+const path = require('path');
+const util = require('util');
 
 //加载koa框架模块
-let koa = require('koa');
-let router = require('koa-router')();
-let serve = require('koa-static');
-let colors = require('colors');
-let open = require('open');
+const koa = require('koa');
+const router = require('koa-router')();
+const serve = require('koa-static');
+const colors = require('colors');
+const open = require('open');
 
 //加载本地文件
-let pkg = require('../package.json');
-let env = process.argv[2] || process.env.NODE_ENV;
-let dev = 'production' !== env;
-let viewDir = dev ? 'src' : 'dist';
-let staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
+const pkg = require('../package.json');
+const env = process.argv[2] || process.env.NODE_ENV;
+const dev = 'production' !== env;
+const viewDir = dev ? 'src' : 'dist';
+const staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
 //加载routes
-let routes = require('./routes/routes.js');
+const routes = require('./routes/routes.js');
 
 //初始化
 let app = koa();
@@ -64,16 +64,16 @@ app.use(router.routes());
 //dev 模式
 if (dev) {
   // statement
-  let webpackDevMiddleware = require('koa-webpack-dev-middleware');
-  let webpack = require('webpack');
-  let webpackConf = require('../webpack-dev.config.js');
-  let compiler = webpack(webpackConf);
+  const webpackDevMiddleware = require('koa-webpack-dev-middleware');
+  const webpack = require('webpack');
+  const webpackConf = require('../webpack-dev.config.js');
+  const compiler = webpack(webpackConf);
 
   //使用koa做服务器配置koa-webpack-dev-middleware
   app.use(webpackDevMiddleware(compiler, webpackConf.devServer));
 
   //配置webpack-hot-middleware实现hot module replace
-  let hotMiddleware = require('webpack-hot-middleware')(compiler);
+  const hotMiddleware = require('webpack-hot-middleware')(compiler);
 
   //koa 对webpack-hot-middleware做适配
   app.use(function*(next) {
@@ -89,7 +89,7 @@ app.use(serve(staticDir, {
 
 app = http.createServer(app.callback());
 app.listen(pkg.server.port, '127.0.0.1', () => {
-  let url = util.format('http://%s:%d', 'localhost', pkg.server.port);
+  const url = util.format('http://%s:%d', 'localhost', pkg.server.port);
   console.log('Listening at %s', url);
   open(url);
 });
