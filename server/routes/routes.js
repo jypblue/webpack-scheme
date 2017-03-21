@@ -7,7 +7,6 @@
  */
 
 'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const render = require('koa-ejs');
@@ -45,8 +44,8 @@ module.exports = (router, app, staticDir) => {
   });
 
   render(app, {
-    root: path.join(__dirname, 'view'),
-    layout: 'template',
+    root: __dirname,
+    layout: false,
     viewExt: 'html',
     cache: false,
     debug: true

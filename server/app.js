@@ -30,7 +30,7 @@ const staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
 const routes = require('./routes/routes.js');
 
 //初始化
-const app = new Koa();
+let app = new Koa();
 
 //基本设定
 app.keys = [pkg.name, pkg.description];
@@ -65,16 +65,16 @@ app.use(router.routes());
 //dev 模式
 if (dev) {
   // statement
-  let webpackDevMiddleware = require('koa-webpack-dev-middleware');
-  let webpack = require('webpack');
-  let webpackConf = require('../webpack-dev.config.js');
-  let compiler = webpack(webpackConf);
+  const webpackDevMiddleware = require('koa-webpack-dev-middleware');
+  const webpack = require('webpack');
+  const webpackConf = require('../webpack-dev.config.js');
+  const compiler = webpack(webpackConf);
 
   //使用koa做服务器配置koa-webpack-dev-middleware
   app.use(webpackDevMiddleware(compiler, webpackConf.devServer));
 
   //配置webpack-hot-middleware实现hot module replace
-  let hotMiddleware = require('webpack-hot-middleware')(compiler);
+  const hotMiddleware = require('webpack-hot-middleware')(compiler);
 
   //koa 对webpack-hot-middleware做适配
   app.use(function*(next) {
@@ -90,7 +90,7 @@ app.use(serve(staticDir, {
 
 app = http.createServer(app.callback());
 app.listen(pkg.server.port, '127.0.0.1', () => {
-  let url = util.format('http://%s:%d', 'localhost', pkg.server.port);
+  const url = util.format('http://%s:%d', 'localhost', pkg.server.port);
   console.log('Listening at %s', url);
   open(url);
 });

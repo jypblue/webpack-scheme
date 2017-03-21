@@ -1,6 +1,6 @@
 {
   "name": "webpack-scheme",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "use webpack and gulp to help write code like react es6 and sass",
   "main": "webpack-build.config.js",
   "scripts": {
@@ -85,7 +85,7 @@
     "image-webpack-loader": "^3.2.0",
     "jsx-loader": "^0.13.2",
     "koa": "^2.2.0",
-    "koa-ejs": "^4.0.0",
+    "koa-ejs": "^3.0.0",
     "koa-proxy": "^0.8.0",
     "koa-rewrite": "^2.1.0",
     "koa-router": "^5.4.0",

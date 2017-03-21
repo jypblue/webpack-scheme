@@ -21,10 +21,10 @@ export default class Tabpane extends Component {
     this.props.active(index);
   }
   checkTabIndex(index) {
-    return index === this.props.defaultIndex ? "tabs-tab active" : "tabs-tab";
+    return index === this.props.defaultIndex ? 'tabs-tab active' : 'tabs-tab';
   }
   checkTabpaneIndex(index) {
-    return index === this.props.defaultIndex ? "tabs-tabpane show":"tabs-tabpane";
+    return index === this.props.defaultIndex ? 'tabs-tabpane show' : 'tabs-tabpane';
   }
 
   render() {
@@ -49,6 +49,6 @@ export default class Tabpane extends Component {
         })}
         </div>
       </div>
-    )
+    );
   }
 }

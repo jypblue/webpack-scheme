@@ -7,19 +7,19 @@
  */
 
 'use strict';
-let gulp = require('gulp');
-let webpack = require('webpack');
-let gulputil = require('gulp-util');
-let colors = require('colors');
+const gulp = require('gulp');
+const webpack = require('webpack');
+const gulputil = require('gulp-util');
+const colors = require('colors');
 // 加载webpack配置文件
-let webpackconf = require('./webpack.config.js');
+const webpackconf = require('./webpack.config.js');
 //dev构建webpack配置文件
 //let webpackdevconf = require('./webpack-dev.config.js');
 
 //js文件目录入口
-let src = process.cwd() + '/src';
+const src = process.cwd() + '/src';
 //文件发布版本
-let dist = process.cwd() + '/dist';
+const dist = process.cwd() + '/dist';
 
 //eslint check
 gulp.task('lint', () => {
@@ -55,26 +55,26 @@ gulp.task('pack', ['clean'], (done) => {
       colors: true
     }));
     done();
-  })
-})
+  });
+});
 
 
 gulp.task('default', ['pack']);
 
 //因为webpack打release包事引用sass会出现问题，所以开发是可以写sass,开发完成后转化为css，
 //引入css再转换生产包打包
-let gulpif = require('gulp-if');
-let plumber = require('gulp-plumber');
-let path = require('path');
-let sass = require('gulp-sass');
-let livereload = require('gulp-livereload');
+const gulpif = require('gulp-if');
+const plumber = require('gulp-plumber');
+const path = require('path');
+const sass = require('gulp-sass');
+const livereload = require('gulp-livereload');
 
 function err(error) {
   console.error('[ERROR]'.red + error.message);
   this.emit('end');
 }
 // 判断文件类型
-var ifsass = function(file) {
+const ifsass = function(file) {
   var extname = path.extname(file.path);
   return extname === '.scss' ? true : false;
 };

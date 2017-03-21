@@ -26,7 +26,7 @@ class PicUpload extends Component {
     const { getFieldProps } = this.props.form;
 
     return (
-      <Form inline horizontal onSubmit={this.handleSubmit} style={{width:800,margin:"auto"}}>
+      <Form inline horizontal onSubmit={this.handleSubmit} style={{width:800,margin:'auto'}}>
       <Row gutter={16}>
         <Col sm={10}>
           <FormItem label="图片路径：">

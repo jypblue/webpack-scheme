@@ -27,8 +27,8 @@ export default class TodoFooter extends Component {
           {this.props.todoDoneCount}已完成/
           { this.props.todoCount}总数
         </span>
-        <button className="fr" onClick={this.handleClick.bind(this)}>清除已完成</button>
+        <button className="fr" onClick={this.handleClick.bind(this)}>清除完成</button>
       </div>
-    )
+    );
   }
 }

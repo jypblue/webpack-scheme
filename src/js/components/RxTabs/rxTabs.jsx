@@ -22,14 +22,14 @@ export default class Tabs extends Component {
     return (
       <div>
         <Tabpane defaultIndex={index} active={this.props.active}>
-          <div name="选项卡一">
-            tab1111
+          <div name="选项卡1">
+            tab1
           </div>
-          <div name="选项卡二">
-            tab2111
+          <div name="选项卡2">
+            tab2
           </div>
-          <div name="选项卡三">
-            tab3111
+          <div name="选项卡3">
+            tab3
           </div>
         </Tabpane>
       </div>

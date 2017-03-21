@@ -7,7 +7,6 @@
  */
 
 'use strict';
-
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
@@ -24,8 +23,8 @@ const dist = path.resolve(process.cwd(), 'dist');
 const nodeModPath = path.resolve(__dirname, './node_modules');
 const pathMap = require('./src/libspath.json');
 
-const entries = (() => {
-  let jsDir = path.resolve(srcDir, 'js');
+let entries = (() => {
+  const jsDir = path.resolve(srcDir, 'js');
   let entryFiles = glob.sync(jsDir + '/*.{js,jsx}');
   let map = {};
 
@@ -52,16 +51,15 @@ module.exports = (options) => {
   let cssLoader;
   let sassLoader;
   let lessLoader;
-
   //自动生成入口文件，入口js名必须和入口文件名相同
   let plugins = (() => {
     let entryHtml = glob.sync(srcDir + '/*.html');
     let filesArr = [];
-
     entryHtml.forEach((filePath) => {
       let filename = filePath.substring(filePath.lastIndexOf('\/') + 1, filePath.lastIndexOf('.'));
+      // html-webpack-plugin 插件配置
       let conf = {
-        template: 'html!' + filePath,
+        template: filePath,
         filename: filename + '.html'
       };
 
@@ -70,11 +68,9 @@ module.exports = (options) => {
         conf.inject = 'body';
         conf.chunks = ['vender', 'common', filename];
       }
-
       if (filename.indexOf('rx') !== -1) {
         //conf.chunks.splice(2, 0, 'redux');
       }
-
       filesArr.push(new HtmlWebpackPlugin(conf));
     });
     return filesArr;
@@ -82,24 +78,46 @@ module.exports = (options) => {
 
   //dev模式
   if (dev) {
-    extractCSS = new ExtractTextPlugin('css/[name].css?[contenthash]');
-    cssLoader = extractCSS.extract(['css']);
-    sassLoader = extractCSS.extract(['css', 'sass']);
-    lessLoader = extractCSS.extract(['css', 'less']);
-
+    extractCSS = new ExtractTextPlugin({
+      filename: 'css/[name].css?[contenthash]',
+      disable: false,
+      allChunks: true
+    });
+    cssLoader = extractCSS.extract({
+      fallback: 'style-loader',
+      use: 'css-loader'
+    });
+    sassLoader = extractCSS.extract({
+      fallback: 'style-loader',
+      use: ['css-loader', 'sass-loader']
+    });
+    lessLoader = extractCSS.extract({
+      fallback: 'style-loader',
+      use: ['css-loader', 'less-loader']
+    });
     plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin());
   } else {
-    extractCSS = new ExtractTextPlugin('css/[name].min.[contenthash:8].css', {
+    // prod模式
+    extractCSS = new ExtractTextPlugin({
+      filename: 'css/[name].min.[contenthash:8].css',
       allChunks: false
     });
-
-    cssLoader = extractCSS.extract(['css?minimize']);
-    sassLoader = extractCSS.extract(['css?minimize'], 'sass');
-    lessLoader = extractCSS.extract(['css?minimize'], 'less');
-
+    cssLoader = extractCSS.extract({
+      fallback: 'style-loader',
+      use: 'css-loader?minimize'
+    });
+    sassLoader = extractCSS.extract({
+      fallback: 'style-loader',
+      use: ['css-loader?minimize', 'sass-loader']
+    });
+    lessLoader = extractCSS.extract({
+      fallback: 'style-loader',
+      use: ['css-loader?minimize', 'less-loader']
+    });
     plugins.push(
       extractCSS,
       new UglifyJsPlugin({
+        sourceMap: true,
         compress: {
           warnings: false
         },
@@ -121,9 +139,11 @@ module.exports = (options) => {
       //   context: path.join(__dirname, "dll"),
       //   manifest: require("./dll/vendor-manifest.json")
       // }),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.NoErrorsPlugin()
-
+      //new webpack.optimize.DedupePlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.LoaderOptionsPlugin({
+        minimize: true
+      })
     );
   };
 
@@ -134,7 +154,6 @@ module.exports = (options) => {
       'vender': ['react', 'react-dom'],
       'redux': ['redux', 'react-redux']
     }, entries),
-
     output: {
       path: dist,
       filename: dev ? '[name].js' : 'js/[name].min.[chunkhash:8].js',
@@ -150,7 +169,7 @@ module.exports = (options) => {
         nodeModPath
       ],
       alias: pathMap,
-      extensions: ['', '.js', '.jsx', '.css', '.scss', '.tpl', '.png', '.jpg', '.jpeg']
+      extensions: ['.js', '.jsx', '.tpl']
     },
 
     module: {
@@ -160,8 +179,8 @@ module.exports = (options) => {
           test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
           //url-loader图片小于10k自动转成dataUrl，
           //否则调用file-loader,参数直接传入
-          loaders: [
-            'url?limit=10000&name=img/[name].[hash:8].[ext]'
+          use: [
+            'url-loader?limit=10000&name=img/[name].[hash:8].[ext]'
             //'image?{bypassOndev:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
           ]
         },
@@ -169,7 +188,17 @@ module.exports = (options) => {
         {
           test: /\.((ttf|eot|woff|svg)(\?t=[0-9]\.[0-9]\.[0-9]))|(ttf|eot|woff|svg)\??.*$/,
           //loader: 'url?limit=10000&name=fonts/[name].[hash:8].[ext]'
-          loader: 'url?limit=10000&name=fonts/[name].[ext]'
+          use: 'url-loader?limit=10000&name=fonts/[name].[ext]'
+        },
+        // html
+        {
+          test: /\.html$/,
+          use: [{
+            loader: 'html-loader',
+            options: {
+              minimize: true
+            }
+          }],
         },
         //css
         {
@@ -179,18 +208,18 @@ module.exports = (options) => {
         //sass
         {
           test: /\.(scss|sass)$/,
-          loader: sassLoader
+          use: sassLoader
         },
         //less
         {
           test: /\.less$/,
-          loeader: lessLoader
+          use: lessLoader
         },
         //jsx
         {
           test: /\.(jsx|js)$/,
-          loader: ['babel-loader'],
-          query: {
+          loader: 'babel-loader',
+          options: {
             presets: ['es2015', 'react', 'stage-0'],
             plugins: [
               ['antd', {
@@ -202,9 +231,7 @@ module.exports = (options) => {
         }
       ]
     },
-
     plugins: [
-
       // //可以自主添加提取公共部分，拆分包以免包过大
       // new CommonsChunkPlugin({
       //   name: 'redux',
@@ -213,17 +240,10 @@ module.exports = (options) => {
       new CommonsChunkPlugin({
         names: ['vender'],
         minChunks: Infinity
-          //chunks: ['rxInput', 'rxCounter', 'rxTodo', 'Tabs', 'rxReddit']
       })
-      // new CommonsChunkPlugin({
-      //   name: 'vender',
-      //   chunks: ['2048', 'formUpload', 'rSlider', 'Todo']
-      // })
-
     ].concat(plugins),
 
     devServer: {
-      //hot: true,
       noInfo: false,
       inline: true,
       publicPath: publicPath,
@@ -233,7 +253,7 @@ module.exports = (options) => {
       }
     }
   };
-
+  // 开发模式
   if (dev) {
     ((entry) => {
       for (let key of Object.keys(entry)) {
@@ -244,9 +264,8 @@ module.exports = (options) => {
         entry[key].push('webpack-hot-middleware/client?reload=true');
       }
     })(config.entry);
-
     config.plugins.push(new webpack.HotModuleReplacementPlugin());
-    config.plugins.push(new webpack.NoErrorsPlugin());
+    config.plugins.push(new webpack.NoEmitOnErrorsPlugin());
   }
 
   return config;

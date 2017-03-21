@@ -6,7 +6,7 @@
  */
 
 'use strict';
-const path = require("path");
+const path = require('path');
 const webpack = require('webpack');
 const srcDir = path.resolve(process.cwd(), 'src');
 const nodeModPath = path.resolve(__dirname, './node_modules');
@@ -23,11 +23,11 @@ const vendors = [
 const antd = [
   'antd',
   'isomorphic-fetch',
-]
+];
 
 module.exports = {
   output: {
-    path: path.join(__dirname, "dll"),
+    path: path.join(__dirname, 'dll'),
     filename: '[name].[chunkhash].js',
     library: '[name]_[chunkhash]',
   },
@@ -37,13 +37,13 @@ module.exports = {
   },
   plugins: [
     new webpack.DllPlugin({
-      path: path.join(__dirname, "dll", "[name]-manifest.json"),
-      name: "[name]",
-      context: path.resolve(__dirname, "dll"),
+      path: path.join(__dirname, 'dll', '[name]-manifest.json'),
+      name: '[name]',
+      context: path.resolve(__dirname, 'dll'),
     }),
   ],
   resolve: {
     root: [srcDir, nodeModPath],
-    modulesDirectories: ["node_modules"]
+    modulesDirectories: ['node_modules']
   }
 };

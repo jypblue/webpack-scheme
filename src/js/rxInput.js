@@ -20,9 +20,11 @@ import InputApp from './containers/rxInput';
 import 'antd/dist/antd.css';
 
 const store = configureStore();
-render(
-  <Provider store={store}>
-    <InputApp />
-  </Provider>,
+render( <
+  Provider store = { store } >
+  <
+  InputApp / >
+  <
+  /Provider>,
   document.getElementById('root')
 );

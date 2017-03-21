@@ -13,8 +13,9 @@ import {
 import configureStore from './store/rxTabs';
 import Tabs from './containers/rxTabs';
 import 'antd/dist/antd.css';
-import '../css/components/Tabs.css';
+//import '../css/components/Tabs.css';
 
+import '../scss/Tabs.scss';
 const store = configureStore();
 render (
   <Provider store={store}>
