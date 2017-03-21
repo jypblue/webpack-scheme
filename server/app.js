@@ -6,30 +6,31 @@
  * @version $Id$
  */
 
-"use strict";
-//加载node模块
-let http = require('http');
-let path = require('path');
-let util = require('util');
+'use strict';
+
+// 加载node模块
+const http = require('http');
+const path = require('path');
+const util = require('util');
 
 //加载koa框架模块
-let koa = require('koa');
-let router = require('koa-router')();
-let serve = require('koa-static');
-let colors = require('colors');
-let open = require('open');
+const Koa = require('koa');
+const router = require('koa-router')();
+const serve = require('koa-static');
+const colors = require('colors');
+const open = require('open');
 
 //加载本地文件
-let pkg = require('../package.json');
-let env = process.argv[2] || process.env.NODE_ENV;
-let dev = 'production' !== env;
-let viewDir = dev ? 'src' : 'dist';
-let staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
+const pkg = require('../package.json');
+const env = process.argv[2] || process.env.NODE_ENV;
+const dev = 'production' !== env;
+const viewDir = dev ? 'src' : 'dist';
+const staticDir = path.resolve(__dirname, '../' + (dev ? 'src' : 'dist'));
 //加载routes
-let routes = require('./routes/routes.js');
+const routes = require('./routes/routes.js');
 
 //初始化
-let app = koa();
+const app = new Koa();
 
 //基本设定
 app.keys = [pkg.name, pkg.description];

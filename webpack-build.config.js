@@ -10,13 +10,10 @@
 
 const path = require('path');
 const fs = require('fs');
-
 const webpack = require('webpack');
 const glob = require('glob');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
@@ -27,7 +24,7 @@ const dist = path.resolve(process.cwd(), 'dist');
 const nodeModPath = path.resolve(__dirname, './node_modules');
 const pathMap = require('./src/libspath.json');
 
-let entries = (() => {
+const entries = (() => {
   let jsDir = path.resolve(srcDir, 'js');
   let entryFiles = glob.sync(jsDir + '/*.{js,jsx}');
   let map = {};
@@ -147,13 +144,17 @@ module.exports = (options) => {
     },
 
     resolve: {
-      root: [srcDir, nodeModPath],
+      // root: [srcDir, nodeModPath],
+      modules: [
+        srcDir,
+        nodeModPath
+      ],
       alias: pathMap,
       extensions: ['', '.js', '.jsx', '.css', '.scss', '.tpl', '.png', '.jpg', '.jpeg']
     },
 
     module: {
-      loaders: [
+      rules: [
         //图片
         {
           test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/,
@@ -173,7 +174,7 @@ module.exports = (options) => {
         //css
         {
           test: /\.css$/,
-          loader: cssLoader
+          use: cssLoader
         },
         //sass
         {

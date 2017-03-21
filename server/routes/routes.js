@@ -9,10 +9,10 @@
 'use strict';
 
 const fs = require('fs');
-
+const path = require('path');
 const render = require('koa-ejs');
 const proxy = require('koa-proxy');
-let serve = require('koa-static');
+const serve = require('koa-static');
 const list = require('../mock/list');
 
 module.exports = (router, app, staticDir) => {
@@ -24,7 +24,6 @@ module.exports = (router, app, staticDir) => {
     let offset = query.offset || 0;
     let limit = query.limit || 10;
     let diff = limit - list.length;
-
     if (diff <= 0) {
       this.body = {
         code: 0,
@@ -46,8 +45,8 @@ module.exports = (router, app, staticDir) => {
   });
 
   render(app, {
-    root: __dirname,
-    layout: false,
+    root: path.join(__dirname, 'view'),
+    layout: 'template',
     viewExt: 'html',
     cache: false,
     debug: true
