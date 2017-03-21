@@ -14,7 +14,7 @@ const colors = require('colors');
 // 加载webpack配置文件
 const webpackconf = require('./webpack.config.js');
 //dev构建webpack配置文件
-//let webpackdevconf = require('./webpack-dev.config.js');
+//const webpackdevconf = require('./webpack-dev.config.js');
 
 //js文件目录入口
 const src = process.cwd() + '/src';
@@ -23,7 +23,7 @@ const dist = process.cwd() + '/dist';
 
 //eslint check
 gulp.task('lint', () => {
-  let eslint = require('gulp-eslint');
+  const eslint = require('gulp-eslint');
   return gulp.src([
       '!' + src + '/js/lib/**/*.js',
       src + '/js/**/*.js'
@@ -35,7 +35,7 @@ gulp.task('lint', () => {
 
 //clean dist
 gulp.task('clean', ['lint'], () => {
-  let clean = require('gulp-clean');
+  const clean = require('gulp-clean');
   return gulp.src(dist, {
     read: true
   }).pipe(clean());
@@ -75,7 +75,7 @@ function err(error) {
 }
 // 判断文件类型
 const ifsass = function(file) {
-  var extname = path.extname(file.path);
+  let extname = path.extname(file.path);
   return extname === '.scss' ? true : false;
 };
 gulp.task('sass', function() {

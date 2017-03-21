@@ -17,7 +17,7 @@ npm install
 4. 如果node-sass过程中报错导致无法安装，解决方法就是添加淘宝NPM镜像cnpm环境，然后以cnpm重新安装node-sass：
 
 ```
-npm install -g cnpm --registry=https://registry.npm.taobao.org`
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 cnpm install --save-dev node-sass
 ```
